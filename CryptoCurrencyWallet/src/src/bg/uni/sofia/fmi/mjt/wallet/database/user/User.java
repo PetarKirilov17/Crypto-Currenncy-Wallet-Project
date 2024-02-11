@@ -71,6 +71,15 @@ public class User implements Serializable {
         return 0.0;
     }
 
+    public double getAvgPrice(String assetId){
+        for(var it : purchases){
+            if(it.assetId().equals(assetId)){
+                return it.avgPrice();
+            }
+        }
+        return 0.0;
+    }
+
     public Set<Purchase> getPurchases(){
         if(purchases == null){
             return new HashSet<>();

@@ -1,44 +1,64 @@
 package src.bg.uni.sofia.fmi.mjt.wallet.client;
 
-import src.bg.uni.sofia.fmi.mjt.wallet.cryptoWallet.apiconsumer.CryptoConsumerAPI;
-import src.bg.uni.sofia.fmi.mjt.wallet.cryptoWallet.apiconsumer.SyncCryptoConsumer;
-import src.bg.uni.sofia.fmi.mjt.wallet.database.Database;
-import src.bg.uni.sofia.fmi.mjt.wallet.database.FileDatabase;
-import src.bg.uni.sofia.fmi.mjt.wallet.database.user.Purchase;
-import src.bg.uni.sofia.fmi.mjt.wallet.database.user.User;
+import com.google.gson.Gson;
+import src.bg.uni.sofia.fmi.mjt.wallet.client.command.Command;
+import src.bg.uni.sofia.fmi.mjt.wallet.client.exception.ServerNotFoundException;
 
-import javax.xml.crypto.Data;
-import java.net.http.HttpClient;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 
 public class CryptoWalletClient {
-    public static void main(String[] args){
-//        HttpClient client = HttpClient.newBuilder().build();
-//        CryptoConsumerAPI consumerAPI = new SyncCryptoConsumer(client);
-//        var result = consumerAPI.getAllAssets();
-//        System.out.println(result.stream().limit(150).toList());
+    private static final int SERVER_PORT = 7777;
+    private static final String SERVER_HOST = "localhost";
+    private static final int BUFFER_SIZE = 1024;
+    private Gson gson;
 
-        Database database = new FileDatabase();
-        User user1 = new User("stoyan", "stoyan123");
-        user1.increaseBalance(10);
-        Purchase purchase1 = new Purchase("BTC", 3);
-        Purchase purchase2 = new Purchase("ETH", 2);
+    private ByteBuffer buffer;
 
-        user1.addPurchase(purchase1);
-        user1.addPurchase(purchase2);
-        database.addUser(user1);
+    private SocketChannel socketChannel;
 
-        User user2 = new User("petar", "petar123");
-        user2.increaseBalance(20);
-        user2.decreaseBalance(6);
-        Purchase purchase3 = new Purchase("BTC", 4);
-        Purchase purchase4 = new Purchase("DOGE", 5);
-        user2.addPurchase(purchase3);
-        user2.addPurchase(purchase4);
-        database.addUser(user2);
-        var res = database.getUsers();
-        for (var it : res.values()){
-            System.out.println(it.getUsername() + " " + it.getBalance());
-            System.out.println(it.getPurchases());
+    public CryptoWalletClient(){
+        gson = new Gson();
+        buffer = ByteBuffer.allocate(BUFFER_SIZE);
+    }
+
+    public void run() throws ServerNotFoundException {
+        try {
+            socketChannel = SocketChannel.open();
+            socketChannel.connect(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
+        } catch (IOException e) {
+            throw new ServerNotFoundException("The server is not working at the moment!", e);
+        }
+    }
+
+    public void stop(){
+        try {
+            socketChannel.close();
+        } catch (IOException e) {
+            throw new RuntimeException("The channel failed to close!", e);
+        }
+    }
+
+    public String sendRequest(Command command) {
+        try {
+            buffer.clear();
+            buffer.put(command.toString().getBytes());
+            buffer.flip(); // switch to reading mode
+            socketChannel.write(buffer); // buffer drain
+
+            buffer.clear(); // switch to writing mode
+            socketChannel.read(buffer); // buffer fill
+            buffer.flip(); // switch to reading mode
+
+            byte[] byteArray = new byte[buffer.remaining()];
+            buffer.get(byteArray);
+
+            return new String(byteArray, StandardCharsets.UTF_8); // buffer drain
+        } catch (Exception e) {
+            throw new RuntimeException("There is a problem with the network communication", e);
         }
     }
 }

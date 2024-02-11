@@ -30,7 +30,7 @@ public class CryptoAssetUpdater {
         var earliest = Collections.min(assetList, Comparator.comparing(CryptoAsset::lastUpdated));
         var currTime = LocalDateTime.now();
         Duration duration = Duration.between(earliest.lastUpdated(), currTime);
-        if(duration.toMinutes() < UPDATE_INTERVAL_IN_MINS){
+        if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
             assetList = cryptoConsumer.getAllAssets();
             assetMap.clear();
             for (var a : assetList){
@@ -42,7 +42,7 @@ public class CryptoAssetUpdater {
     public void updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId){
         var asset = assetMap.get(assetId);
         Duration duration = Duration.between(asset.lastUpdated(),LocalDateTime.now());
-        if(duration.toMinutes() < UPDATE_INTERVAL_IN_MINS){
+        if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
             asset = cryptoConsumer.getAssetById(asset.assetId());
             assetMap.put(assetId, asset);
         }

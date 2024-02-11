@@ -24,7 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CryptoWalletController implements CryptoWalletAPI {
-    private static final int ASSETS_LIST_SIZE = 150;
+    private static final int ASSETS_LIST_SIZE = 20;
     private HttpClient client;
     private Database database;
     private Map<String, CryptoAsset> assets;
@@ -85,15 +85,15 @@ public class CryptoWalletController implements CryptoWalletAPI {
         cryptoAssetUpdater.updateAllAssetsIfNeeded(assets);
         StringBuilder sb = new StringBuilder();
         var assetList = assets.values().stream().limit(ASSETS_LIST_SIZE).toList();
-        for (var a : assetList){
-            sb.append("Asset ID: " +  a.assetId() + " -> " + "Price: " + a.priceUSD());
+        for (var a : assetList) {
+            sb.append("Asset ID: " + a.assetId() + " -> " + "Price: " + a.priceUSD());
             sb.append(System.lineSeparator());
         }
         return sb.toString();
     }
 
     @Override
-    public void buyAsset(SelectionKey key, String assetId, double amount)
+    public void buyAsset(SelectionKey key, String assetId, double money)
         throws UnauthorizedUserException, InvalidAssetIdException, InsufficientBalanceException {
         checkAuthorization(key);
 
@@ -102,17 +102,21 @@ public class CryptoWalletController implements CryptoWalletAPI {
         User currentUser = (User) key.attachment();
         CryptoAsset asset = getAssetByAssetId(assetId);
 
-        double neededMoney = asset.priceUSD() * amount;
-        if (Double.compare(currentUser.getBalance(), neededMoney) < 0) {
+        if (Double.compare(currentUser.getBalance(), money) < 0) {
             throw new InsufficientBalanceException(
                 "There is no enough money in your account! Please first deposit money!");
         }
 
         double previousAmount = currentUser.getAmountOfAsset(assetId);
+        double previousAvg = currentUser.getAvgPrice(assetId);
+        double amountToBuy = money / asset.priceUSD();
+
+        double newAvg =
+            (previousAmount * previousAvg + amountToBuy * asset.priceUSD()) / (previousAmount + amountToBuy);
         currentUser.removePurchase(assetId);
-        Purchase purchase = new Purchase(assetId, amount + previousAmount);
+        Purchase purchase = new Purchase(assetId,  previousAmount + amountToBuy, newAvg);
         currentUser.addPurchase(purchase);
-        currentUser.decreaseBalance(neededMoney);
+        currentUser.decreaseBalance(money);
         database.updateUser(currentUser);
     }
 
@@ -140,7 +144,7 @@ public class CryptoWalletController implements CryptoWalletAPI {
         sb.append(currentUser.getBalance());
         sb.append(System.lineSeparator());
         for (var it : currentUser.getPurchases()) {
-            sb.append("Asset ID: " + it.assetId() + "Amount: " + it.amount());
+            sb.append("Asset ID: " + it.assetId() + " Amount: " + it.amount());
             sb.append(System.lineSeparator());
         }
         return sb.toString();
@@ -149,9 +153,22 @@ public class CryptoWalletController implements CryptoWalletAPI {
     @Override
     public String getWalletOverallSummary(SelectionKey key) throws UnauthorizedUserException {
         checkAuthorization(key);
-        //TODO: add time calculation
-        //TODO: add logic
-        return null;
+        cryptoAssetUpdater.updateAllAssetsIfNeeded(assets);
+        User currentUser = (User) key.attachment();
+        var userPurchases = currentUser.getPurchases();
+        StringBuilder sb = new StringBuilder();
+        for(var up : userPurchases){
+            CryptoAsset currentAsset = this.assets.get(up.assetId());
+            double difference = up.amount() * currentAsset.priceUSD() - up.amount() * up.avgPrice();
+            if(difference > 0.0){
+                sb.append("Asset ID: " + up.assetId() + " Amount: " + up.amount() + " UP: " + difference);
+            }else{
+                difference = -difference;
+                sb.append("Asset ID: " + up.assetId() + " Amount: " + up.amount() + " DOWN: " + difference);
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 
     private void validateStrings(String username, String password)
@@ -171,7 +188,7 @@ public class CryptoWalletController implements CryptoWalletAPI {
     }
 
     private CryptoAsset getAssetByAssetId(String assetId) throws InvalidAssetIdException {
-        if(!assets.containsKey(assetId)){
+        if (!assets.containsKey(assetId)) {
             throw new InvalidAssetIdException("Asset ID is invalid!");
         }
         return assets.get(assetId);
