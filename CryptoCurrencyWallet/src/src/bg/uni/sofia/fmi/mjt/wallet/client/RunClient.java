@@ -4,6 +4,7 @@ import src.bg.uni.sofia.fmi.mjt.wallet.client.command.Command;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.command.CommandCreator;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.command.CommandExecutor;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.command.CommandLabel;
+import src.bg.uni.sofia.fmi.mjt.wallet.client.command.CommandValidator;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.exception.InvalidUserCommandException;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.exception.ServerNotFoundException;
 import src.bg.uni.sofia.fmi.mjt.wallet.client.ui.ConsoleUI;
@@ -21,8 +22,8 @@ public class RunClient {
             ui.writeError("You need to start the server!");
             return;
         }
-
-        CommandExecutor commandExecutor = new CommandExecutor(ui, cryptoWalletClient);
+        CommandValidator validator = new CommandValidator(ui);
+        CommandExecutor commandExecutor = new CommandExecutor(ui, cryptoWalletClient, validator);
         CommandCreator commandCreator = new CommandCreator(ui);
 
         ui.write("Welcome to Crypto Wallet! Type help to see the available commands: ");

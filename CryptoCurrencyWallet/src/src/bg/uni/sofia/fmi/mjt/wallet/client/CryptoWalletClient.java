@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 public class CryptoWalletClient {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_HOST = "localhost";
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 4096;
     private Gson gson;
 
     private ByteBuffer buffer;
@@ -45,7 +45,7 @@ public class CryptoWalletClient {
     public String sendRequest(Command command) {
         try {
             buffer.clear();
-            buffer.put(command.toString().getBytes());
+            buffer.put(gson.toJson(command).getBytes());
             buffer.flip(); // switch to reading mode
             socketChannel.write(buffer); // buffer drain
 

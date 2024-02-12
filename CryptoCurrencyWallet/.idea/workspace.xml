@@ -2,9 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a181eee9-586f-4a7d-b545-c5f7ae4fc3b7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/validation/StringValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/CommandLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CryptoCurrencyWallet/src/bg/uni/sofia/fmi/mjt/wallet/database/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CryptoCurrencyWallet/src/bg/uni/sofia/fmi/mjt/wallet/database/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/CryptoWalletClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/CryptoWalletClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/RunClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/RunClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/CommandCreator.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/CommandExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoAssetUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoAssetUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/apiconsumer/CryptoConsumerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/apiconsumer/CryptoConsumerAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/database/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/database/user/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/database/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/database/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/server/CryptoWalletServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/server/CryptoWalletServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/server/RunServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/validation/StringValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/validation/StringValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +72,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.RunClient">
-    <configuration name="RunClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="RunClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.bg.uni.sofia.fmi.mjt.wallet.client.RunClient" />
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
@@ -130,24 +150,19 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/command/CommandExecutor.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandExecutor.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/apiconsumer/SyncCryptoConsumer.java</url>
           <line>65</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletController.java</url>
-          <line>154</line>
-          <option name="timeStamp" value="12" />
+          <line>110</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/src/bg/uni/sofia/fmi/mjt/wallet/cryptoWallet/CryptoWalletController.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonSyntaxException" package="com.google.gson" />

@@ -2,10 +2,8 @@ package src.bg.uni.sofia.fmi.mjt.wallet.database.user;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class User implements Serializable {
@@ -60,6 +58,15 @@ public class User implements Serializable {
                 break;
             }
         }
+    }
+
+    public boolean containsAsset(String assetId){
+        for (var it : purchases){
+            if(it.assetId().equals(assetId)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getAmountOfAsset(String assetId){

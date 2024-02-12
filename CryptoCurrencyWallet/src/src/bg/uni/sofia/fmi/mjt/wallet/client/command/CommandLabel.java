@@ -12,6 +12,7 @@ public enum CommandLabel {
     WALLET_SUMMARY("get-wallet-summary"),
     WALLET_OVERALL_SUMMARY("get-wallet-overall-summary"),
     HELP("help"),
+    LOG_OUT("log-out"),
     QUIT("quit");
 
     public final String userCommand;

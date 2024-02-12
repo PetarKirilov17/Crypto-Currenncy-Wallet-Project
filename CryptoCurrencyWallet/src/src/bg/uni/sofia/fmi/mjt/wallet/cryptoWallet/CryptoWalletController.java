@@ -84,7 +84,7 @@ public class CryptoWalletController implements CryptoWalletAPI {
         checkAuthorization(key);
         cryptoAssetUpdater.updateAllAssetsIfNeeded(assets);
         StringBuilder sb = new StringBuilder();
-        var assetList = assets.values().stream().limit(ASSETS_LIST_SIZE).toList();
+        var assetList = assets.values().stream().filter(a -> a.priceUSD()!=null).limit(ASSETS_LIST_SIZE).toList();
         for (var a : assetList) {
             sb.append("Asset ID: ").append(a.assetId()).append(" -> ").append("Price: ")
                 .append(String.format("%.4f", a.priceUSD())).append("$ per unit!");
@@ -122,12 +122,15 @@ public class CryptoWalletController implements CryptoWalletAPI {
     }
 
     @Override
-    public void sellAsset(SelectionKey key, String assetId) throws UnauthorizedUserException, InvalidAssetIdException {
+    public double sellAsset(SelectionKey key, String assetId) throws UnauthorizedUserException, InvalidAssetIdException {
         checkAuthorization(key);
 
         cryptoAssetUpdater.updateAssetIfNeeded(assets, assetId);
 
         User currentUser = (User) key.attachment();
+        if(!currentUser.containsAsset(assetId)){
+            throw new InvalidAssetIdException("You do not have purchases from " + assetId);
+        }
         CryptoAsset asset = getAssetByAssetId(assetId);
 
         double amountOfAsset = currentUser.getAmountOfAsset(assetId);
@@ -135,6 +138,7 @@ public class CryptoWalletController implements CryptoWalletAPI {
         double receivingMoney = asset.priceUSD() * amountOfAsset;
         currentUser.increaseBalance(receivingMoney);
         database.updateUser(currentUser);
+        return receivingMoney;
     }
 
     @Override
@@ -162,16 +166,16 @@ public class CryptoWalletController implements CryptoWalletAPI {
             CryptoAsset currentAsset = this.assets.get(up.assetId());
             double difference = up.amount() * currentAsset.priceUSD() - up.amount() * up.avgPrice();
             if(difference == 0.0){
-                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
-                    .append(String.format("%.4f", up.amount())).append(" You do not have profit or loss!");
+                sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" | You do not have profit or loss!");
             }
             else if(difference > 0.0){
-                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
-                    .append(String.format("%.4f", up.amount())).append(" UP: ").append(difference);
+                sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" | UP: ").append(String.format("%.4f", difference)).append("$");
             }else{
                 difference = -difference;
-                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
-                    .append(String.format("%.4f", up.amount())).append(" DOWN: ").append(difference);
+                sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" | DOWN: ").append(String.format("%.4f", difference)).append("$");
             }
             sb.append(System.lineSeparator());
         }

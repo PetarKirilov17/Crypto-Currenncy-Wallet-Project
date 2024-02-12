@@ -1,4 +1,4 @@
-package src.bg.uni.sofia.fmi.mjt.wallet.validation;
+package src.bg.uni.sofia.fmi.mjt.wallet.client.validation;
 
 import java.util.regex.Pattern;
 

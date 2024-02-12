@@ -6,7 +6,6 @@ import src.bg.uni.sofia.fmi.mjt.wallet.cryptoWallet.apiconsumer.assets.CryptoAss
 import java.util.List;
 
 public interface CryptoConsumerAPI {
-    //TODO: change
     List<CryptoAsset> getAllAssets();
 
     CryptoAsset getAssetById(String id);

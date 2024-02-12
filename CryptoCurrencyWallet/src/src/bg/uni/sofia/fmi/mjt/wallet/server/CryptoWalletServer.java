@@ -1,7 +1,9 @@
 package src.bg.uni.sofia.fmi.mjt.wallet.server;
 
-import src.bg.uni.sofia.fmi.mjt.wallet.command.CommandCreator;
+import com.google.gson.Gson;
+import src.bg.uni.sofia.fmi.mjt.wallet.command.Command;
 import src.bg.uni.sofia.fmi.mjt.wallet.command.CommandExecutor;
+import src.bg.uni.sofia.fmi.mjt.wallet.command.Response;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -17,46 +19,51 @@ import java.util.Set;
 public class CryptoWalletServer {
     public static final int SERVER_PORT = 7777;
     private static final String SERVER_HOST = "localhost";
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 4096;
     private boolean isServerOn;
     private Selector selector;
     private ByteBuffer buffer;
     private final CommandExecutor commandExecutor;
 
-    public CryptoWalletServer(CommandExecutor executor){
+    public CryptoWalletServer(CommandExecutor executor) {
         this.commandExecutor = executor;
     }
 
-    public void start(){
-        try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()){
+    public void start() {
+        Gson gson = new Gson();
+        try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
             selector = Selector.open();
             configServerSocketChannel(serverSocketChannel, selector);
 
             this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
             isServerOn = true;
             System.out.println("Server started!");
-            while(isServerOn){
+            while (isServerOn) {
                 int readyChannels = selector.select();
-                if(readyChannels == 0){
+                if (readyChannels == 0) {
                     continue;
                 }
                 Set<SelectionKey> selectionKeySet = selector.selectedKeys();
                 Iterator<SelectionKey> keyIterator = selectionKeySet.iterator();
 
-                while(keyIterator.hasNext()){
+                while (keyIterator.hasNext()) {
                     SelectionKey key = keyIterator.next();
-                    if(key.isReadable()) {
+                    if (key.isReadable()) {
                         SocketChannel sc = (SocketChannel) key.channel();
                         String clientInput = getClientInput(sc);
                         System.out.println(clientInput);
-                        if(clientInput == null){
+                        if (clientInput == null) {
                             continue;
                         }
-                        String response = commandExecutor.execute(key, CommandCreator.createCommand(clientInput));
-                        System.out.println("Response: " + response);
-                        sendResponse(sc, response);
+                        Response response = commandExecutor.execute(key, gson.fromJson(clientInput, Command.class));
+                        if(response.isOk()) {
+                            System.out.println("Response: " + response.getResponse());
+                        }else{
+                            System.err.println("Response Error: " + response.getResponse());
+                        }
+                        sendResponse(sc, gson.toJson(response));
                         //TODO: add functionality for disconnecting
-                    }else if(key.isAcceptable()){
+                    } else if (key.isAcceptable()) {
                         accept(key);
                     }
                     keyIterator.remove();
@@ -67,7 +74,7 @@ public class CryptoWalletServer {
         }
     }
 
-    public void stop(){
+    public void stop() {
         this.isServerOn = false;
         System.out.println("The server is stopped");
         if (selector.isOpen()) {

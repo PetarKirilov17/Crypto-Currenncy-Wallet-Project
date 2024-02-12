@@ -28,7 +28,7 @@ public interface CryptoWalletAPI {
     void buyAsset(SelectionKey key, String assetId, double money)
         throws UnauthorizedUserException, InvalidAssetIdException, InsufficientBalanceException;
 
-    void sellAsset(SelectionKey key, String assetId) throws UnauthorizedUserException, InvalidAssetIdException;
+    double sellAsset(SelectionKey key, String assetId) throws UnauthorizedUserException, InvalidAssetIdException;
 
     String getWalletSummary(SelectionKey key) throws UnauthorizedUserException;
 
