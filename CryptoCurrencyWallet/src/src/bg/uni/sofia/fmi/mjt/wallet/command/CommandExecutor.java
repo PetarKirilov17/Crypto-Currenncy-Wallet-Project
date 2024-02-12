@@ -135,7 +135,12 @@ public class CommandExecutor {
         return response;
     }
     private String getWalletOverallSummary(SelectionKey key){
-        //TODO: add logic
-        return "";
+        String response;
+        try {
+            response = cryptoWallet.getWalletOverallSummary(key);
+        } catch (UnauthorizedUserException e) {
+            response = "You are not logged in! Please log in to your account!";
+        }
+        return response;
     }
 }

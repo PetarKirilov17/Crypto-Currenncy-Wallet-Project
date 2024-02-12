@@ -25,10 +25,10 @@ import java.util.Map;
 
 public class CryptoWalletController implements CryptoWalletAPI {
     private static final int ASSETS_LIST_SIZE = 20;
-    private HttpClient client;
-    private Database database;
-    private Map<String, CryptoAsset> assets;
-    private PasswordHasherAPI passwordHasher;
+    private final HttpClient client;
+    private final Database database;
+    private final Map<String, CryptoAsset> assets;
+    private final PasswordHasherAPI passwordHasher;
     private final CryptoConsumerAPI consumerAPI;
     private final CryptoAssetUpdater cryptoAssetUpdater;
 
@@ -86,7 +86,8 @@ public class CryptoWalletController implements CryptoWalletAPI {
         StringBuilder sb = new StringBuilder();
         var assetList = assets.values().stream().limit(ASSETS_LIST_SIZE).toList();
         for (var a : assetList) {
-            sb.append("Asset ID: " + a.assetId() + " -> " + "Price: " + a.priceUSD());
+            sb.append("Asset ID: ").append(a.assetId()).append(" -> ").append("Price: ")
+                .append(String.format("%.4f", a.priceUSD())).append("$ per unit!");
             sb.append(System.lineSeparator());
         }
         return sb.toString();
@@ -141,10 +142,10 @@ public class CryptoWalletController implements CryptoWalletAPI {
         checkAuthorization(key);
         User currentUser = (User) key.attachment();
         StringBuilder sb = new StringBuilder();
-        sb.append(currentUser.getBalance());
+        sb.append("Current balance: ").append(String.format("%.4f", currentUser.getBalance())).append("$");
         sb.append(System.lineSeparator());
         for (var it : currentUser.getPurchases()) {
-            sb.append("Asset ID: " + it.assetId() + " Amount: " + it.amount());
+            sb.append("Asset ID: ").append(it.assetId()).append(" Amount: ").append(String.format("%.4f", it.amount()));
             sb.append(System.lineSeparator());
         }
         return sb.toString();
@@ -160,11 +161,17 @@ public class CryptoWalletController implements CryptoWalletAPI {
         for(var up : userPurchases){
             CryptoAsset currentAsset = this.assets.get(up.assetId());
             double difference = up.amount() * currentAsset.priceUSD() - up.amount() * up.avgPrice();
-            if(difference > 0.0){
-                sb.append("Asset ID: " + up.assetId() + " Amount: " + up.amount() + " UP: " + difference);
+            if(difference == 0.0){
+                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" You do not have profit or loss!");
+            }
+            else if(difference > 0.0){
+                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" UP: ").append(difference);
             }else{
                 difference = -difference;
-                sb.append("Asset ID: " + up.assetId() + " Amount: " + up.amount() + " DOWN: " + difference);
+                sb.append("Asset ID: ").append(up.assetId()).append(" Amount: ")
+                    .append(String.format("%.4f", up.amount())).append(" DOWN: ").append(difference);
             }
             sb.append(System.lineSeparator());
         }
