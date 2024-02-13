@@ -1,7 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.database;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
-import bg.uni.sofia.fmi.mjt.wallet.server.database.user.Purchase;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -18,12 +17,10 @@ import java.util.Map;
 
 public class FileDatabase implements Database {
 
-    private static final String USERS_FILE_PATH =
-        "users.txt";
-    private static final String RES_DIRECTORY = "res";
-    private Path usersPath = Path.of(RES_DIRECTORY, USERS_FILE_PATH).toAbsolutePath();;
+    private final Path usersPath;
     private Map<String, User> users;
-    public FileDatabase() {
+    public FileDatabase(Path usersPath) {
+        this.usersPath = usersPath;
         users = loadUsersFromFile();
     }
 
@@ -37,15 +34,6 @@ public class FileDatabase implements Database {
     public void updateUser(User user) {
         users.put(user.getUsername(), user);
         writeUsersToFile();
-    }
-
-    @Override
-    public void addPurchaseToUser(User user, Purchase purchase) {
-
-    }
-
-    @Override
-    public void removePurchaseFromUser(User user, Purchase purchase) {
     }
 
     @Override

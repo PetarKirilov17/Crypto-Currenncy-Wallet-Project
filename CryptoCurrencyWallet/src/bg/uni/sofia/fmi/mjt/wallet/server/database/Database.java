@@ -12,10 +12,6 @@ public interface Database {
 
     void updateUser(User user);
 
-    void addPurchaseToUser(User user, Purchase purchase);
-
-    void removePurchaseFromUser(User user, Purchase purchase);
-
     boolean checkIfUserExists(String username);
 
     User getUserByUsername(String username);

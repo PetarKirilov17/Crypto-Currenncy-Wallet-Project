@@ -2,6 +2,7 @@ package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.CryptoConsumerAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -29,7 +30,12 @@ public class CryptoAssetUpdater {
 
     public void updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap){
         if(assetMap.isEmpty()){
-            var assetList = this.cryptoConsumer.getAllAssets();
+            List<CryptoAsset> assetList = null;
+            try {
+                assetList = this.cryptoConsumer.getAllAssets();
+            } catch (InvalidCredentialsForAPIException e) {
+                throw new RuntimeException(e.getMessage(), e.getCause());
+            }
             for (var a : assetList){
                 assetMap.put(a.assetId(), a);
             }
@@ -41,7 +47,11 @@ public class CryptoAssetUpdater {
         var currTime = LocalDateTime.now();
         Duration duration = Duration.between(earliest.lastUpdated(), currTime);
         if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
-            assetList = cryptoConsumer.getAllAssets();
+            try {
+                assetList = cryptoConsumer.getAllAssets();
+            } catch (InvalidCredentialsForAPIException e) {
+                throw new RuntimeException(e.getMessage(), e.getCause());
+            }
             assetMap.clear();
             for (var a : assetList){
                 assetMap.put(a.assetId(), a);
@@ -53,7 +63,11 @@ public class CryptoAssetUpdater {
         var asset = assetMap.get(assetId);
         Duration duration = Duration.between(asset.lastUpdated(),LocalDateTime.now());
         if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
-            asset = cryptoConsumer.getAssetById(asset.assetId());
+            try {
+                asset = cryptoConsumer.getAssetById(asset.assetId());
+            } catch (InvalidCredentialsForAPIException e) {
+                throw new RuntimeException(e.getMessage(), e.getCause());
+            }
             assetMap.put(assetId, asset);
         }
     }

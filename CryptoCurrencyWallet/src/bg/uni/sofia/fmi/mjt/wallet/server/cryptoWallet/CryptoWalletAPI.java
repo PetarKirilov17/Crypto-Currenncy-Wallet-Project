@@ -21,7 +21,7 @@ public interface CryptoWalletAPI {
 
     void depositMoney(SelectionKey key, double amount) throws UnauthorizedUserException;
 
-    String listOfferings(SelectionKey key) throws UnauthorizedUserException;
+    String listOfferings(SelectionKey key, int pageNumber) throws UnauthorizedUserException;
 
     void buyAsset(SelectionKey key, String assetId, double money)
         throws UnauthorizedUserException, InvalidAssetIdException, InsufficientBalanceException;

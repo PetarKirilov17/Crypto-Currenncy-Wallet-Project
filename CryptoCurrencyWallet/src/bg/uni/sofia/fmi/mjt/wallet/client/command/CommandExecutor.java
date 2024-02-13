@@ -36,7 +36,8 @@ public class CommandExecutor {
                     case DEPOSIT_MONEY -> depositMoney(command);
                     case BUY_ASSET -> buyAsset(command);
                     case SELL_ASSET -> sellAsset(command);
-                    case LIST_OFFERINGS, WALLET_SUMMARY, WALLET_OVERALL_SUMMARY -> noArgsCommand(command);
+                    case LIST_OFFERINGS -> listOfferings(command);
+                    case WALLET_SUMMARY, WALLET_OVERALL_SUMMARY -> noArgsCommand(command);
                     case LOG_OUT -> logOut();
                     default -> ui.writeError("Invalid command!");
                 }
@@ -54,11 +55,13 @@ public class CommandExecutor {
             return;
         }
         ui.write(CommandLabel.DEPOSIT_MONEY.userCommand + " <money>");
-        ui.write(CommandLabel.LIST_OFFERINGS.userCommand);
+        ui.write(CommandLabel.LIST_OFFERINGS.userCommand + " <page number>");
         ui.write(CommandLabel.BUY_ASSET.userCommand + " <assetID> <money>");
         ui.write(CommandLabel.SELL_ASSET.userCommand + " <assetID>");
         ui.write(CommandLabel.WALLET_SUMMARY.userCommand);
         ui.write(CommandLabel.WALLET_OVERALL_SUMMARY.userCommand);
+        ui.write(CommandLabel.LOG_OUT.userCommand);
+        ui.write(CommandLabel.HELP.userCommand);
     }
 
     private void printResponse(Command command){
@@ -115,6 +118,13 @@ public class CommandExecutor {
 
     private void sellAsset(Command command){
         if(!validator.validateSellAsset(command)){
+            return;
+        }
+        printResponse(command);
+    }
+
+    private void listOfferings(Command command){
+        if(!validator.validateListOfferings(command)){
             return;
         }
         printResponse(command);

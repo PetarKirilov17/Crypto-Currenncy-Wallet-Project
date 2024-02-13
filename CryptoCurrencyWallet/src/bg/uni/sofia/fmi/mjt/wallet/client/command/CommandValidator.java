@@ -11,12 +11,14 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class CommandValidator {
     private static final String RES_DIRECTORY = "res";
     private static final String ASSET_IDS_FILE_PATH = "assetIds.txt";
     private Path assetIdsPath = Path.of(RES_DIRECTORY,ASSET_IDS_FILE_PATH).toAbsolutePath();
     private static final String DOUBLE_REGEX = "-?\\d+(\\.\\d+)?";
+    private static final String DIGITS_REGEX = "^\\d+$";
     private static final int ONE_DESIRED_ARG = 1;
     private static final int TWO_DESIRED_ARGS = 2;
     private static final int ZERO_DESIRED_ARGS = 0;
@@ -24,6 +26,8 @@ public class CommandValidator {
     private static final String WRONG_USERNAME_MESSAGE = "Username has to be between " + StringValidator.MIN_USERNAME_LENGTH + " and " + StringValidator.MAX_USERNAME_LENGTH + " characters long! It must contain only alphanumeric characters!";
     private static final String WRONG_PASSWORD_MESSAGE = "Password has to be between " + StringValidator.MIN_PASSWORD_LENGTH + " and " + StringValidator.MAX_PASSWORD_LENGTH;
     private static final String WRONG_DOUBLE_NUMBER_MESSAGE = "Double number is not in correct format! Please insert a valid number!";
+    private static final String WRONG_POSITIVE_INTEGER_MESSAGE = "Page number is not in correct format! Please insert a valid number!";
+
     private static final String WRONG_ASSET_ID_MESSAGE = "There is no asset with this asset ID!";
     private UI ui;
     private final Set<String> assetIds;
@@ -55,6 +59,17 @@ public class CommandValidator {
         }
         if(!isValidDouble(command.getArguments()[0])){
             ui.writeError(WRONG_DOUBLE_NUMBER_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateListOfferings(Command command){
+        if(!checkSizeOfPassedArguments(command.getArguments().length, ONE_DESIRED_ARG)){
+            return false;
+        }
+        if(!isValidPositiveInteger(command.getArguments()[0])){
+            ui.writeError(WRONG_POSITIVE_INTEGER_MESSAGE);
             return false;
         }
         return true;
@@ -110,5 +125,9 @@ public class CommandValidator {
 
     private boolean isValidAssetId(String userInput) {
         return assetIds.contains(userInput);
+    }
+
+    private static boolean isValidPositiveInteger(String input) {
+        return Pattern.matches(DIGITS_REGEX, input) && Integer.parseInt(input) > 0;
     }
 }

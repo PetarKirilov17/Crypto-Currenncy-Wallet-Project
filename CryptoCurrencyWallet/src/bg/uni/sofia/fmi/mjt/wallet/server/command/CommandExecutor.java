@@ -32,7 +32,7 @@ public class CommandExecutor {
                 case REGISTER -> register(key, command.arguments()[0], command.arguments()[1]);
                 case LOGIN -> login(key, command.arguments()[0], command.arguments()[1]);
                 case DEPOSIT_MONEY -> depositMoney(key, Double.parseDouble(command.arguments()[0]));
-                case LIST_OFFERINGS -> listOfferings(key);
+                case LIST_OFFERINGS -> listOfferings(key, Integer.parseInt(command.arguments()[0]));
                 case BUY_ASSET -> buyAsset(key, command.arguments()[0], Double.parseDouble(command.arguments()[1]));
                 case SELL_ASSET -> sellAsset(key, command.arguments()[0]);
                 case WALLET_SUMMARY -> getWalletSummary(key);
@@ -103,11 +103,11 @@ public class CommandExecutor {
         return new Response(isOk, responseStr);
     }
 
-    private Response listOfferings(SelectionKey key) {
+    private Response listOfferings(SelectionKey key, int pageNumber) {
         boolean isOk = false;
         String responseStr;
         try {
-            responseStr = cryptoWallet.listOfferings(key);
+            responseStr = cryptoWallet.listOfferings(key, pageNumber);
             isOk = true;
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));

@@ -2,6 +2,7 @@ package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.Asset;
 import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,23 +20,29 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
     private HttpClient client;
     private static final String COIN_API_URL = "https://rest.coinapi.io/v1/assets";
 
+    private static final int CREDENTIALS_BAD_REQUEST_STATUS_CODE = 401;
+
     public SyncCryptoConsumer(HttpClient client){
         this.client = client;
     }
     @Override
-    public List<CryptoAsset> getAllAssets() {
+    public List<CryptoAsset> getAllAssets() throws InvalidCredentialsForAPIException {
         HttpResponse<String> responseStr;
+        URI uri;
         try {
-            URI uri = new URI(COIN_API_URL);
-            HttpRequest request = HttpRequest.newBuilder().uri(uri)
-                .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
-                .build();
-
-            responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            uri = new URI(COIN_API_URL);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
         }
+        HttpRequest request = HttpRequest.newBuilder().uri(uri)
+            .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
+            .build();
+        try {
+            responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+        validateResponse(responseStr.statusCode());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Asset[] response = gson.fromJson(responseStr.body(), Asset[].class);
         List<CryptoAsset> result = new ArrayList<>();
@@ -49,21 +56,32 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
     }
 
     @Override
-    public CryptoAsset getAssetById(String id) {
+    public CryptoAsset getAssetById(String id) throws InvalidCredentialsForAPIException {
         HttpResponse<String> responseStr;
+        URI uri;
         try {
-            URI uri = new URI(COIN_API_URL+"/"+id);
-            HttpRequest request = HttpRequest.newBuilder().uri(uri)
-                .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
-                .build();
+            uri = new URI(COIN_API_URL+"/"+id);
 
-            responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
         }
+        HttpRequest request = HttpRequest.newBuilder().uri(uri)
+            .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
+            .build();
+        try{
+            responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+        validateResponse(responseStr.statusCode());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Asset[] response = gson.fromJson(responseStr.body(), Asset[].class);
         return new CryptoAsset(response[0].assetId(), response[0].name(), response[0].priceUSD(), LocalDateTime.now());
+    }
+
+    private void validateResponse(int responseStatusCode) throws InvalidCredentialsForAPIException {
+        if(responseStatusCode == CREDENTIALS_BAD_REQUEST_STATUS_CODE){
+            throw new InvalidCredentialsForAPIException("API Key is not specified or it is not correctly formatted!");
+        }
     }
 }
