@@ -28,7 +28,7 @@ public class CryptoAssetUpdater {
         this.cryptoConsumer = cryptoConsumer;
     }
 
-    public void updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap){
+    public Map<String, CryptoAsset> updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap){
         if(assetMap.isEmpty()){
             List<CryptoAsset> assetList = null;
             try {
@@ -40,7 +40,7 @@ public class CryptoAssetUpdater {
                 assetMap.put(a.assetId(), a);
             }
             writeCryptoAssetsIdsToFile(assetList.stream().map(CryptoAsset::assetId).toList());
-            return;
+            return assetMap;
         }
         var assetList = assetMap.values().stream().toList();
         var earliest = Collections.min(assetList, Comparator.comparing(CryptoAsset::lastUpdated));
@@ -57,9 +57,10 @@ public class CryptoAssetUpdater {
                 assetMap.put(a.assetId(), a);
             }
         }
+        return assetMap;
     }
 
-    public void updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId){
+    public Map<String, CryptoAsset> updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId){
         var asset = assetMap.get(assetId);
         Duration duration = Duration.between(asset.lastUpdated(),LocalDateTime.now());
         if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
@@ -70,6 +71,7 @@ public class CryptoAssetUpdater {
             }
             assetMap.put(assetId, asset);
         }
+        return assetMap;
     }
 
     private void writeCryptoAssetsIdsToFile(List<String> assetIds){

@@ -2,31 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a181eee9-586f-4a7d-b545-c5f7ae4fc3b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mockito_core.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mockito_junit_jupiter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/UserServiceAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletServiceAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/exception/InvalidCredentialsForAPIException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/database/FileDatabaseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CryptoCurrencyWallet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CryptoCurrencyWallet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CryptoCurrencyWallet/bg/uni/sofia/fmi/mjt/wallet/server/database/users.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/users.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/client/command/CommandValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CryptoCurrencyWallet/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CryptoCurrencyWallet/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/RunServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/RunServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/command/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/command/CommandExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/CryptoConsumerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/CryptoConsumerAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/database/FileDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/database/FileDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/database/users.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletServiceAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/WalletServiceAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletControllerTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,36 +57,7 @@
       <recent name="src.bg.uni.sofia.fmi.mjt.wallet.apiconsumer" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RunClient">
-    <configuration name="RunClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.client.RunClient" />
-      <module name="CryptoCurrencyWallet" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="bg.uni.sofia.fmi.mjt.wallet.server.RunServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <envs>
-        <env name="CryptoAPI_KEY" value="C5804680-F0FA-4C16-9917-802E375AE12E" />
-      </envs>
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.RunServer" />
-      <module name="CryptoCurrencyWallet" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.WalletServiceTest">
     <configuration name="All in CryptoCurrencyWallet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <option name="PACKAGE_NAME" value="" />
@@ -112,51 +66,83 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CryptoWalletControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WalletServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletControllerTest" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CryptoWalletControllerTest.testRegisterSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WalletServiceTest.listOfferingsReturnsExpectedOutput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletControllerTest" />
-      <option name="METHOD_NAME" value="testRegisterSuccessfully" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceTest" />
+      <option name="METHOD_NAME" value="listOfferingsReturnsExpectedOutput" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalletServiceTest.testGetWalletOverallSummary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CryptoCurrencyWallet" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceTest" />
+      <option name="METHOD_NAME" value="testGetWalletOverallSummary" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalletServiceTest.testGetWalletSummary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CryptoCurrencyWallet" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceTest" />
+      <option name="METHOD_NAME" value="testGetWalletSummary" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.RunClient" />
-      <item itemvalue="Application.bg.uni.sofia.fmi.mjt.wallet.server.RunServer" />
+      <item itemvalue="JUnit.WalletServiceTest" />
+      <item itemvalue="JUnit.WalletServiceTest.listOfferingsReturnsExpectedOutput" />
+      <item itemvalue="JUnit.WalletServiceTest.testGetWalletOverallSummary" />
+      <item itemvalue="JUnit.WalletServiceTest.testGetWalletSummary" />
       <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
-      <item itemvalue="JUnit.CryptoWalletControllerTest.testRegisterSuccessfully" />
-      <item itemvalue="JUnit.CryptoWalletControllerTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunClient" />
-        <item itemvalue="Application.bg.uni.sofia.fmi.mjt.wallet.server.RunServer" />
-        <item itemvalue="JUnit.CryptoWalletControllerTest.testRegisterSuccessfully" />
+        <item itemvalue="JUnit.WalletServiceTest" />
+        <item itemvalue="JUnit.WalletServiceTest.testGetWalletOverallSummary" />
+        <item itemvalue="JUnit.WalletServiceTest.testGetWalletSummary" />
+        <item itemvalue="JUnit.WalletServiceTest.listOfferingsReturnsExpectedOutput" />
         <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
-        <item itemvalue="JUnit.CryptoWalletControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -191,11 +177,6 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletController.java</url>
           <line>165</line>
           <option name="timeStamp" value="23" />
@@ -216,6 +197,6 @@
     <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$FileDatabaseTest.ic" NAME="FileDatabaseTest Coverage Results" MODIFIED="1707778214311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.database.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707820190749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707844989922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

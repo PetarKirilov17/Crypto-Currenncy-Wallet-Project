@@ -19,18 +19,20 @@ import java.net.http.HttpClient;
 import java.nio.file.Path;
 
 public class RunServer {
+    private static final String USERS_FILE_PATH =
+        "users.txt";
+    private static final String RES_DIRECTORY = "res";
+
+    private static final int ASSETS_TO_SHOW = 20;
+
     public static void main(String[] args) {
-        String USERS_FILE_PATH =
-            "users.txt";
-        final String RES_DIRECTORY = "res";
         Path usersPath = Path.of(RES_DIRECTORY, USERS_FILE_PATH).toAbsolutePath();
         Database database = new FileDatabase(usersPath);
 
-        HttpClient httpClient =  HttpClient.newBuilder().build();
+        HttpClient httpClient = HttpClient.newBuilder().build();
         CryptoConsumerAPI consumerAPI = new SyncCryptoConsumer(httpClient);
         CryptoAssetUpdater updater = new CryptoAssetUpdater(consumerAPI);
         WalletServiceAPI walletServiceAPI = new WalletService(database, updater);
-
         PasswordHasherAPI passwordHasherAPI = new MDPasswordHasher();
         UserServiceAPI userService = new UserService(database, passwordHasherAPI);
 

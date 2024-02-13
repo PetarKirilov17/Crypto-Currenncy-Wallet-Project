@@ -16,4 +16,6 @@ public interface WalletServiceAPI {
     String getWalletSummary(User user);
 
     String getWalletOverallSummary(User user);
+
+    void setAssetsToShow(int assetsToShow);
 }
