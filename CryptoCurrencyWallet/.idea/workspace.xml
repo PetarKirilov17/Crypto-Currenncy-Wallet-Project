@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a181eee9-586f-4a7d-b545-c5f7ae4fc3b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service/UserServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdaterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/database/password/MDPasswordHasherTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdater.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_directory_selection": "D:/University/Sem3/MJT-Course/CryptoCurrencyProject/CryptoCurrencyWallet/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/service",
+    "last_directory_selection": "D:/University/Sem3/MJT-Course/CryptoCurrencyProject/CryptoCurrencyWallet/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -60,84 +62,83 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testLoginSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CryptoAssetUpdaterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testLoginSuccessfully" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdaterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CryptoAssetUpdaterTest.testUpdateAssetIfNeededException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CryptoCurrencyWallet" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdaterTest" />
+      <option name="METHOD_NAME" value="testUpdateAssetIfNeededException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testLoginThrowsLoginAuthenticationExceptionWhenUsernameOrPasswordIsIncorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CryptoAssetUpdaterTest.testUpdateAssetIfNeededNeeded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testLoginThrowsLoginAuthenticationExceptionWhenUsernameOrPasswordIsIncorrect" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdaterTest" />
+      <option name="METHOD_NAME" value="testUpdateAssetIfNeededNeeded" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testRegisterSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CryptoAssetUpdaterTest.testUpdateAssetIfNotNeeded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testRegisterSuccessfully" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.testRegisterThrowsUserAlreadyExistsExceptionWhenPassingUsernameThatAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CryptoCurrencyWallet" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testRegisterThrowsUserAlreadyExistsExceptionWhenPassingUsernameThatAlreadyExists" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdaterTest" />
+      <option name="METHOD_NAME" value="testUpdateAssetIfNotNeeded" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.UserServiceTest.testLoginSuccessfully" />
-      <item itemvalue="JUnit.UserServiceTest.testLoginThrowsLoginAuthenticationExceptionWhenUsernameOrPasswordIsIncorrect" />
-      <item itemvalue="JUnit.UserServiceTest.testRegisterSuccessfully" />
-      <item itemvalue="JUnit.UserServiceTest.testRegisterThrowsUserAlreadyExistsExceptionWhenPassingUsernameThatAlreadyExists" />
+      <item itemvalue="JUnit.CryptoAssetUpdaterTest" />
+      <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNeededException" />
+      <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNeededNeeded" />
+      <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNotNeeded" />
       <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
-        <item itemvalue="JUnit.UserServiceTest.testLoginSuccessfully" />
-        <item itemvalue="JUnit.UserServiceTest.testLoginThrowsLoginAuthenticationExceptionWhenUsernameOrPasswordIsIncorrect" />
-        <item itemvalue="JUnit.UserServiceTest.testRegisterSuccessfully" />
-        <item itemvalue="JUnit.UserServiceTest.testRegisterThrowsUserAlreadyExistsExceptionWhenPassingUsernameThatAlreadyExists" />
+        <item itemvalue="JUnit.CryptoAssetUpdaterTest" />
+        <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNeededException" />
+        <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNeededNeeded" />
+        <item itemvalue="JUnit.CryptoAssetUpdaterTest.testUpdateAssetIfNotNeeded" />
       </list>
     </recent_temporary>
   </component>
@@ -187,11 +188,22 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$CryptoAssetUpdaterTest.ic" NAME="CryptoAssetUpdaterTest Coverage Results" MODIFIED="1707855701254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$FileDatabaseTest.ic" NAME="FileDatabaseTest Coverage Results" MODIFIED="1707778214311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.database.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707844989922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707849529331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$MDPasswordHasherTest_testHashPassword.ic" NAME="MDPasswordHasherTest.testHashPassword Coverage Results" MODIFIED="1707850648446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.database.password.*</FILTER>
+    </SUITE>
   </component>
 </project>

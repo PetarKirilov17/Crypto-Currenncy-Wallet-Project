@@ -24,8 +24,11 @@ public class CryptoAssetUpdater {
     private final static int UPDATE_INTERVAL_IN_MINS = 30;
     private CryptoConsumerAPI cryptoConsumer;
 
+    private int intervalInMins;
+
     public CryptoAssetUpdater(CryptoConsumerAPI cryptoConsumer){
         this.cryptoConsumer = cryptoConsumer;
+        this.intervalInMins = UPDATE_INTERVAL_IN_MINS;
     }
 
     public Map<String, CryptoAsset> updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap){
@@ -46,7 +49,7 @@ public class CryptoAssetUpdater {
         var earliest = Collections.min(assetList, Comparator.comparing(CryptoAsset::lastUpdated));
         var currTime = LocalDateTime.now();
         Duration duration = Duration.between(earliest.lastUpdated(), currTime);
-        if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
+        if(duration.toMinutes() > this.intervalInMins){
             try {
                 assetList = cryptoConsumer.getAllAssets();
             } catch (InvalidCredentialsForAPIException e) {
@@ -63,7 +66,7 @@ public class CryptoAssetUpdater {
     public Map<String, CryptoAsset> updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId){
         var asset = assetMap.get(assetId);
         Duration duration = Duration.between(asset.lastUpdated(),LocalDateTime.now());
-        if(duration.toMinutes() > UPDATE_INTERVAL_IN_MINS){
+        if(duration.toMinutes() > this.intervalInMins){
             try {
                 asset = cryptoConsumer.getAssetById(asset.assetId());
             } catch (InvalidCredentialsForAPIException e) {
@@ -72,6 +75,13 @@ public class CryptoAssetUpdater {
             assetMap.put(assetId, asset);
         }
         return assetMap;
+    }
+
+    public void setInterval(int intervalInMins){
+        if(intervalInMins < 0){
+            throw new RuntimeException("Interval cannot be a negative number!");
+        }
+        this.intervalInMins = intervalInMins;
     }
 
     private void writeCryptoAssetsIdsToFile(List<String> assetIds){
