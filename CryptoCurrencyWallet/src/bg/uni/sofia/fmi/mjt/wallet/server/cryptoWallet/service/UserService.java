@@ -41,7 +41,6 @@ public class UserService implements UserServiceAPI{
         return user;
     }
 
-
     private User buildUser(String username, String password)
         throws UsernameWrongFormatException, PasswordWrongFormatException, UserAlreadyExistsException {
         validateStrings(username, password);
