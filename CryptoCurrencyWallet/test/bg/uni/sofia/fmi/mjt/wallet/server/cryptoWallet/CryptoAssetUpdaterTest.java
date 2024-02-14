@@ -9,22 +9,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -110,7 +104,7 @@ public class CryptoAssetUpdaterTest {
     }
 
     @Test
-    void testUpdateAssetIfNeededNeeded() throws InvalidCredentialsForAPIException {
+    void testUpdateAssetIfNeeded() throws InvalidCredentialsForAPIException {
         String assetId = "BTC";
         CryptoAsset existingAsset = new CryptoAsset(assetId, "Bitcoin", 50000.0, LocalDateTime.now().minusMinutes(45));
         Map<String, CryptoAsset> assetMap = new HashMap<>();
@@ -127,7 +121,7 @@ public class CryptoAssetUpdaterTest {
     }
 
     @Test
-    void testUpdateAssetIfNeededException() throws InvalidCredentialsForAPIException {
+    void testUpdateAssetIfNeededThrowsRuntimeException() throws InvalidCredentialsForAPIException {
         String assetId = "BTC";
         CryptoAsset existingAsset = new CryptoAsset(assetId, "Bitcoin", 50000.0, LocalDateTime.now().minusMinutes(45));
         Map<String, CryptoAsset> assetMap = new HashMap<>();

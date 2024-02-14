@@ -76,6 +76,9 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
         validateResponse(responseStr.statusCode());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Asset[] response = gson.fromJson(responseStr.body(), Asset[].class);
+        if(response.length == 0){
+            throw new RuntimeException("No valid response!");
+        }
         return new CryptoAsset(response[0].assetId(), response[0].name(), response[0].priceUSD(), LocalDateTime.now());
     }
 
