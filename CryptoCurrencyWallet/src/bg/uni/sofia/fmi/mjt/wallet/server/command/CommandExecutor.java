@@ -26,7 +26,7 @@ public class CommandExecutor {
     public Response execute(SelectionKey key, Command command) {
         try {
             if (command == null || command.commandLabel() == null) {
-                throw new RuntimeException("Command cannot be null!");
+                return new Response(false, ERROR + "Command cannot be null!");
             }
             return switch (command.commandLabel()) {
                 case REGISTER -> register(key, command.arguments()[0], command.arguments()[1]);
@@ -45,137 +45,128 @@ public class CommandExecutor {
         }
     }
 
-    //TODO: add loggers
     private Response register(SelectionKey key, String username, String password) {
-        boolean isOk = false;
-        String responseStr;
         try {
             cryptoWallet.register(key, username, password);
-            isOk = true;
-            responseStr = "You successfully signed up!";
+            String responseStr = "You successfully signed up!";
+            return new Response(true, responseStr);
         } catch (UsernameWrongFormatException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "The username that you provided is in wrong format!";
+            String responseStr = "The username that you provided is in wrong format!";
+            return new Response(false, responseStr);
         } catch (UserAlreadyExistsException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You cannot register with this username because there is an user with the same username!";
+            String responseStr = "You cannot register with this username because there is an user with the same username!";
+            return new Response(false, responseStr);
         } catch (PasswordWrongFormatException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "The password that you provided is in wrong format!";
+            String responseStr = "The password that you provided is in wrong format!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response login(SelectionKey key, String username, String password) {
-        boolean isOk = false;
-        String responseStr;
         try {
             cryptoWallet.login(key, username, password);
-            isOk = true;
-            responseStr = "You successfully logged in!";
+            String responseStr = "You successfully logged in!";
+            return new Response(true, responseStr);
         } catch (UserNotFoundException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "There is no user with this username!";
+            String responseStr = "There is no user with this username!";
+            return new Response(false, responseStr);
         } catch (UsernameWrongFormatException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "The username that you provided is in wrong format!";
+            String responseStr = "The username that you provided is in wrong format!";
+            return new Response(false, responseStr);
         } catch (LoginAuthenticationException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "Your username or password is incorrect!";
+            String responseStr = "Your username or password is incorrect!";
+            return new Response(false, responseStr);
         } catch (PasswordWrongFormatException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "The password that you provided is in wrong format!";
+            String responseStr = "The password that you provided is in wrong format!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response depositMoney(SelectionKey key, double amount) {
-        boolean isOk = false;
-        String responseStr;
         try {
             cryptoWallet.depositMoney(key, amount);
-            isOk = true;
-            responseStr = "Successfully deposited " + String.format("%.4f", amount) + "$";
+            String responseStr = "Successfully deposited " + String.format("%.4f", amount) + "$";
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response listOfferings(SelectionKey key, int pageNumber) {
-        boolean isOk = false;
-        String responseStr;
         try {
-            responseStr = cryptoWallet.listOfferings(key, pageNumber);
-            isOk = true;
+            String responseStr = cryptoWallet.listOfferings(key, pageNumber);
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response buyAsset(SelectionKey key, String assetId, double amount) {
-        boolean isOk = false;
-        String responseStr;
         try {
             cryptoWallet.buyAsset(key, assetId, amount);
-            isOk = true;
-            responseStr = "You successfully bought " +  assetId +  " for " + String.format("%.4f", amount) + "$";
+            String responseStr = "You successfully bought " +  assetId +  " for " + String.format("%.4f", amount) + "$";
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         } catch (InsufficientBalanceException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You do not have enough money!";
+            String responseStr = "You do not have enough money!";
+            return new Response(false, responseStr);
         } catch (InvalidAssetIdException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "There is no asset with this id!";
+            String responseStr = "There is no asset with this id!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response sellAsset(SelectionKey key, String assetId) {
-        boolean isOk = false;
-        String responseStr;
         try {
             double earnedMoney = cryptoWallet.sellAsset(key, assetId);
-            isOk = true;
-            responseStr = "You successfully sold your actives from " + assetId + " and earned " + String.format("%.4f", earnedMoney) + "$";
+            String responseStr = "You successfully sold your actives from " + assetId + " and earned " + String.format("%.4f", earnedMoney) + "$";
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         } catch (InvalidAssetIdException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "There is no asset with this id!";
+            String responseStr = "There is no asset with this id!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response getWalletSummary(SelectionKey key) {
-        boolean isOk = false;
-        String responseStr;
         try {
-            responseStr = cryptoWallet.getWalletSummary(key);
-            isOk = true;
+            String responseStr = cryptoWallet.getWalletSummary(key);
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 
     private Response getWalletOverallSummary(SelectionKey key) {
-        boolean isOk = false;
-        String responseStr;
         try {
-            responseStr = cryptoWallet.getWalletOverallSummary(key);
-            isOk = true;
+            String responseStr = cryptoWallet.getWalletOverallSummary(key);
+            return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
             ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            responseStr = "You are not logged in! Please log in to your account!";
+            String responseStr = "You are not logged in! Please log in to your account!";
+            return new Response(false, responseStr);
         }
-        return new Response(isOk, responseStr);
     }
 }

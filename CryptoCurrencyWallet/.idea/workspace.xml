@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a181eee9-586f-4a7d-b545-c5f7ae4fc3b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoWalletControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/command/CommandExecutorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdaterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/CryptoAssetUpdaterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/command/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/command/CommandExecutor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +40,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_directory_selection": "D:/University/Sem3/MJT-Course/CryptoCurrencyProject/CryptoCurrencyWallet/test/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet",
+    "last_directory_selection": "D:/University/Sem3/MJT-Course/CryptoCurrencyProject/CryptoCurrencyWallet/test/bg/uni/sofia/fmi/mjt/wallet/server",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -68,96 +66,84 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SyncCryptoConsumerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandExecutorTest.testExecuteCatchesException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.command.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.SyncCryptoConsumerTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <envs>
-        <env name="CryptoAPI_KEY" value="ala" />
-      </envs>
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command.CommandExecutorTest" />
+      <option name="METHOD_NAME" value="testExecuteCatchesException" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SyncCryptoConsumerTest.testGetAllAssetsByAssetIdInvalidCredentials" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandExecutorTest.testExecuteCommandIsNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.command.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.SyncCryptoConsumerTest" />
-      <option name="METHOD_NAME" value="testGetAllAssetsByAssetIdInvalidCredentials" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command.CommandExecutorTest" />
+      <option name="METHOD_NAME" value="testExecuteCommandIsNull" />
       <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="CryptoAPI_KEY" value="ALA" />
-      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SyncCryptoConsumerTest.testGetAssetByIdSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandExecutorTest.testExecuteThrowsRuntimeExceptionWhenCommandIsNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.command.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.SyncCryptoConsumerTest" />
-      <option name="METHOD_NAME" value="testGetAssetByIdSuccessfully" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command.CommandExecutorTest" />
+      <option name="METHOD_NAME" value="testExecuteThrowsRuntimeExceptionWhenCommandIsNull" />
       <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="CryptoAPI_KEY" value="ala" />
-      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SyncCryptoConsumerTest.testGetAssetByIdThrowsRuntimeExceptionWhenAssetIdIsNotValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandExecutorTest.testGetWalletOverallSummaryCatchesUnauthorizedException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CryptoCurrencyWallet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.*" />
+          <option name="PATTERN" value="bg.uni.sofia.fmi.mjt.wallet.server.command.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer" />
-      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.SyncCryptoConsumerTest" />
-      <option name="METHOD_NAME" value="testGetAssetByIdThrowsRuntimeExceptionWhenAssetIdIsNotValid" />
+      <option name="PACKAGE_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command" />
+      <option name="MAIN_CLASS_NAME" value="bg.uni.sofia.fmi.mjt.wallet.server.command.CommandExecutorTest" />
+      <option name="METHOD_NAME" value="testGetWalletOverallSummaryCatchesUnauthorizedException" />
       <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="CryptoAPI_KEY" value="aba" />
-      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAssetByIdThrowsRuntimeExceptionWhenAssetIdIsNotValid" />
+      <item itemvalue="JUnit.CommandExecutorTest.testExecuteCatchesException" />
+      <item itemvalue="JUnit.CommandExecutorTest.testExecuteCommandIsNull" />
+      <item itemvalue="JUnit.CommandExecutorTest.testExecuteThrowsRuntimeExceptionWhenCommandIsNull" />
+      <item itemvalue="JUnit.CommandExecutorTest.testGetWalletOverallSummaryCatchesUnauthorizedException" />
       <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
-      <item itemvalue="JUnit.SyncCryptoConsumerTest" />
-      <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAssetByIdSuccessfully" />
-      <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAllAssetsByAssetIdInvalidCredentials" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in CryptoCurrencyWallet" />
-        <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAssetByIdThrowsRuntimeExceptionWhenAssetIdIsNotValid" />
-        <item itemvalue="JUnit.SyncCryptoConsumerTest" />
-        <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAssetByIdSuccessfully" />
-        <item itemvalue="JUnit.SyncCryptoConsumerTest.testGetAllAssetsByAssetIdInvalidCredentials" />
+        <item itemvalue="JUnit.CommandExecutorTest.testExecuteCatchesException" />
+        <item itemvalue="JUnit.CommandExecutorTest.testExecuteCommandIsNull" />
+        <item itemvalue="JUnit.CommandExecutorTest.testExecuteThrowsRuntimeExceptionWhenCommandIsNull" />
+        <item itemvalue="JUnit.CommandExecutorTest.testGetWalletOverallSummaryCatchesUnauthorizedException" />
       </list>
     </recent_temporary>
   </component>
@@ -216,16 +202,6 @@
           <line>67</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/bg/uni/sofia/fmi/mjt/wallet/server/cryptoWallet/apiconsumer/SyncCryptoConsumer.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.google.gson.JsonSyntaxException" package="com.google.gson" />
           <option name="timeStamp" value="8" />
@@ -239,13 +215,19 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$CommandExecutorTest_execute_RegisterCommand_UsernameWrongFormatException.ic" NAME="CommandExecutorTest.execute_RegisterCommand_UsernameWrongFormatException Coverage Results" MODIFIED="1707869544381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.command.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$CryptoAssetUpdaterTest.ic" NAME="CryptoAssetUpdaterTest Coverage Results" MODIFIED="1707857110901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$CommandExecutorTest_testExecuteRegisterCommandCatchesUserAlreadyExistsException.ic" NAME="CommandExecutorTest.testExecuteRegisterCommandCatchesUserAlreadyExistsException Coverage Results" MODIFIED="1707869914867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.command.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$FileDatabaseTest.ic" NAME="FileDatabaseTest Coverage Results" MODIFIED="1707778214311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.database.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707868598183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$All_in_CryptoCurrencyWallet.ic" NAME="All in CryptoCurrencyWallet Coverage Results" MODIFIED="1707898923312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/CryptoCurrencyWallet$MDPasswordHasherTest_testHashPassword.ic" NAME="MDPasswordHasherTest.testHashPassword Coverage Results" MODIFIED="1707850648446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.uni.sofia.fmi.mjt.wallet.server.database.password.*</FILTER>
     </SUITE>
