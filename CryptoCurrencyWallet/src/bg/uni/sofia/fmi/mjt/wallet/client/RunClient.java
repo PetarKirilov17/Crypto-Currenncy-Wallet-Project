@@ -22,8 +22,9 @@ public class RunClient {
             ui.writeError("You need to start the server!");
             return;
         }
+        SessionInfo sessionInfo = new SessionInfo();
         CommandValidator validator = new CommandValidator(ui);
-        CommandExecutor commandExecutor = new CommandExecutor(ui, cryptoWalletClient, validator);
+        CommandExecutor commandExecutor = new CommandExecutor(ui, cryptoWalletClient, validator, sessionInfo);
         CommandCreator commandCreator = new CommandCreator(ui);
 
         ui.write("Welcome to Crypto Wallet! Type help to see the available commands: ");

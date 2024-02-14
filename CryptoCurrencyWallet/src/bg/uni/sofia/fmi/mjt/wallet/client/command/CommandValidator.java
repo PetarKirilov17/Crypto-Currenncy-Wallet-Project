@@ -22,7 +22,7 @@ public class CommandValidator {
     private static final int ONE_DESIRED_ARG = 1;
     private static final int TWO_DESIRED_ARGS = 2;
     private static final int ZERO_DESIRED_ARGS = 0;
-    private static final String INVALID_SIZE_OF_ARGS = "You passed invalid count of arguments! ";
+    private static final String INVALID_SIZE_OF_ARGS = "You passed an invalid count of arguments!";
     private static final String WRONG_USERNAME_MESSAGE = "Username has to be between " + StringValidator.MIN_USERNAME_LENGTH + " and " + StringValidator.MAX_USERNAME_LENGTH + " characters long! It must contain only alphanumeric characters!";
     private static final String WRONG_PASSWORD_MESSAGE = "Password has to be between " + StringValidator.MIN_PASSWORD_LENGTH + " and " + StringValidator.MAX_PASSWORD_LENGTH;
     private static final String WRONG_DOUBLE_NUMBER_MESSAGE = "Double number is not in correct format! Please insert a valid number!";
@@ -34,6 +34,10 @@ public class CommandValidator {
     public CommandValidator(UI ui){
         this.ui = ui;
         assetIds = new HashSet<>(loadAssetIdsFromFile());
+    }
+    public CommandValidator(UI ui, Set<String> assetIds){
+        this.ui = ui;
+        this.assetIds = assetIds;
     }
 
     public boolean validateRegisterAndSignUp(Command command){

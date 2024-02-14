@@ -12,10 +12,13 @@ public class CommandExecutor {
     private CommandValidator validator;
     private Gson gson;
 
-    public CommandExecutor(UI ui, CryptoWalletClient httpClient, CommandValidator validator) {
+    private final SessionInfo sessionInfo;
+
+    public CommandExecutor(UI ui, CryptoWalletClient httpClient, CommandValidator validator, SessionInfo sessionInfo) {
         this.ui = ui;
         this.httpClient = httpClient;
         this.validator = validator;
+        this.sessionInfo = sessionInfo;
         gson = new Gson();
     }
 
@@ -25,7 +28,7 @@ public class CommandExecutor {
             return;
         }
         try {
-            if (!SessionInfo.isLoggedIn()) {
+            if (!sessionInfo.isLoggedIn()) {
                 switch (command.getCommandLabel()) {
                     case REGISTER -> register(command);
                     case LOGIN -> login(command);
@@ -48,7 +51,7 @@ public class CommandExecutor {
     }
 
     private void printHelpMenu(){
-        if(!SessionInfo.isLoggedIn()){
+        if(!sessionInfo.isLoggedIn()){
             ui.write(CommandLabel.REGISTER.userCommand + " <username> <password>");
             ui.write(CommandLabel.LOGIN.userCommand + " <username> <password>");
             ui.write(CommandLabel.QUIT.userCommand);
@@ -81,7 +84,7 @@ public class CommandExecutor {
         Response response = gson.fromJson(httpClient.sendRequest(command), Response.class);
 
         if (response.isOk()) {
-            SessionInfo.logIn(command.getArguments()[0]);
+            sessionInfo.logIn(command.getArguments()[0]);
             ui.write(response.getResponse());
         } else {
             ui.writeError(response.getResponse());
@@ -95,7 +98,7 @@ public class CommandExecutor {
         Response response = gson.fromJson(httpClient.sendRequest(command), Response.class);
 
         if (response.isOk()) {
-            SessionInfo.logIn(command.getArguments()[0]);
+            sessionInfo.logIn(command.getArguments()[0]);
             ui.write(response.getResponse());
         } else {
             ui.writeError(response.getResponse());
@@ -138,7 +141,7 @@ public class CommandExecutor {
     }
 
     private void logOut() {
-        SessionInfo.logOut();
+        sessionInfo.logOut();
         ui.write("Logged out");
     }
 

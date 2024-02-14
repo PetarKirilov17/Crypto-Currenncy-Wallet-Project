@@ -1,25 +1,25 @@
 package bg.uni.sofia.fmi.mjt.wallet.client;
 
 public class SessionInfo {
-    private static String loggedInUser;
+    private String loggedInUser;
 
-    public static boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return loggedInUser != null;
     }
 
-    public static String getLoggedInUser() {
+    public String getLoggedInUser() {
         return loggedInUser;
     }
 
-    public static void logIn(String username) {
+    public void logIn(String username) {
         if (isLoggedIn()) {
-            throw new IllegalStateException("There is already logged in user. Log out first!");
+            throw new IllegalStateException("There is already a logged-in user. Log out first!");
         }
 
         loggedInUser = username;
     }
 
-    public static void logOut() {
+    public void logOut() {
         if (!isLoggedIn()) {
             throw new IllegalStateException("Nobody is logged in");
         }
