@@ -5,8 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-public class MDPasswordHasher implements PasswordHasherAPI{
+public class MDPasswordHasher implements PasswordHasherAPI {
     private static final String HASH_ALGO = "SHA-256";
+
     @Override
     public String hashPassword(String password) {
         try {

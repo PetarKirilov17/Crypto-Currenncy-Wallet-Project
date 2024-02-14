@@ -1,6 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.command;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoWalletAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InsufficientBalanceException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidAssetIdException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.LoginAuthenticationException;
@@ -10,14 +10,12 @@ import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserAlreadyExistsException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserNotFoundException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UsernameWrongFormatException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.channels.SelectionKey;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

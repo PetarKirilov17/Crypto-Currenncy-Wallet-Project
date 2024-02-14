@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdater;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoAssetUpdater;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.Database;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.Purchase;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
@@ -15,11 +15,14 @@ import java.util.Map;
 
 public class WalletService implements WalletServiceAPI {
     private static final int ASSETS_TO_SHOW_BY_DEF = 20;
+
+    private static final double MIN_POSSIBLE_PRICE = 0.0001;
     private final Database database;
     private final CryptoAssetUpdater cryptoAssetUpdater;
     private Map<String, CryptoAsset> assets;
     private int assetsToShow;
-    public WalletService(Database database, CryptoAssetUpdater updater){
+
+    public WalletService(Database database, CryptoAssetUpdater updater) {
         this.database = database;
         this.cryptoAssetUpdater = updater;
         this.assets = new LinkedHashMap<>();
@@ -37,8 +40,9 @@ public class WalletService implements WalletServiceAPI {
     public String listOfferings(int pageNumber) {
         assets = cryptoAssetUpdater.updateAllAssetsIfNeeded(assets);
         StringBuilder sb = new StringBuilder();
-        var assetList = assets.values().stream().filter(a -> a.priceUSD()!=null && a.priceUSD() > 0.0001).skip(
-            (long) (pageNumber - 1) *assetsToShow ).limit(assetsToShow).toList();
+        var assetList =
+            assets.values().stream().filter(a -> a.priceUSD() != null && a.priceUSD() > MIN_POSSIBLE_PRICE).skip(
+                (long) (pageNumber - 1) * assetsToShow).limit(assetsToShow).toList();
         for (var a : assetList) {
             sb.append("Asset ID: ").append(a.assetId()).append(" -> ").append("Price: ")
                 .append(String.format("%.4f", a.priceUSD())).append("$ per unit!");
@@ -66,7 +70,7 @@ public class WalletService implements WalletServiceAPI {
         double newAvg =
             (previousAmount * previousAvg + amountToBuy * asset.priceUSD()) / (previousAmount + amountToBuy);
         user.removePurchase(assetId);
-        Purchase purchase = new Purchase(assetId,  previousAmount + amountToBuy, newAvg);
+        Purchase purchase = new Purchase(assetId, previousAmount + amountToBuy, newAvg);
         user.addPurchase(purchase);
         user.decreaseBalance(money);
         database.updateUser(user);
@@ -74,7 +78,7 @@ public class WalletService implements WalletServiceAPI {
 
     @Override
     public double sellAsset(User user, String assetId) throws InvalidAssetIdException {
-        if(!user.containsAsset(assetId)){
+        if (!user.containsAsset(assetId)) {
             throw new InvalidAssetIdException("You do not have purchases from " + assetId);
         }
         assets = cryptoAssetUpdater.updateAssetIfNeeded(assets, assetId);
@@ -110,20 +114,21 @@ public class WalletService implements WalletServiceAPI {
         StringBuilder sb = new StringBuilder();
         List<Purchase> sortedPurchases = user.getPurchases().stream()
             .sorted(Comparator.comparing(Purchase::assetId)).toList();
-        for(var up : sortedPurchases){
+        for (var up : sortedPurchases) {
             CryptoAsset currentAsset = this.assets.get(up.assetId());
             double difference = up.amount() * currentAsset.priceUSD() - up.amount() * up.avgPrice();
-            if(difference == 0.0){
+            if (difference == 0.0) {
                 sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
                     .append(String.format("%.4f", up.amount())).append(" | You do not have profit or loss!");
-            }
-            else if(difference > 0.0){
+            } else if (difference > 0.0) {
                 sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
-                    .append(String.format("%.4f", up.amount())).append(" | UP: ").append(String.format("%.4f", difference)).append("$");
-            }else{
+                    .append(String.format("%.4f", up.amount())).append(" | UP: ")
+                    .append(String.format("%.4f", difference)).append("$");
+            } else {
                 difference = -difference;
                 sb.append("Asset ID: ").append(up.assetId()).append(" | Amount: ")
-                    .append(String.format("%.4f", up.amount())).append(" | DOWN: ").append(String.format("%.4f", difference)).append("$");
+                    .append(String.format("%.4f", up.amount())).append(" | DOWN: ")
+                    .append(String.format("%.4f", difference)).append("$");
             }
             sb.append(System.lineSeparator());
         }
@@ -132,7 +137,7 @@ public class WalletService implements WalletServiceAPI {
 
     @Override
     public void setAssetsToShow(int assetsToShow) {
-        if(assetsToShow < 0){
+        if (assetsToShow < 0) {
             throw new RuntimeException("Cannot provide negative number of assets");
         }
         this.assetsToShow = assetsToShow;

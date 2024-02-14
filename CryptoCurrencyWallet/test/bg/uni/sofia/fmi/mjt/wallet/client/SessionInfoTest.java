@@ -1,4 +1,4 @@
-import bg.uni.sofia.fmi.mjt.wallet.client.SessionInfo;
+package bg.uni.sofia.fmi.mjt.wallet.client;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

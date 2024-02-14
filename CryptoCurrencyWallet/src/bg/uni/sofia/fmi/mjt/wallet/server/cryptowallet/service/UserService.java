@@ -1,4 +1,4 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.database.Database;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.password.PasswordHasherAPI;
@@ -10,13 +10,15 @@ import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserNotFoundException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UsernameWrongFormatException;
 import bg.uni.sofia.fmi.mjt.wallet.server.validation.StringValidator;
 
-public class UserService implements UserServiceAPI{
+public class UserService implements UserServiceAPI {
     private final Database database;
     private final PasswordHasherAPI passwordHasher;
-    public UserService(Database database, PasswordHasherAPI passwordHasher){
+
+    public UserService(Database database, PasswordHasherAPI passwordHasher) {
         this.database = database;
         this.passwordHasher = passwordHasher;
     }
+
     @Override
     public User register(String username, String password)
         throws UsernameWrongFormatException, UserAlreadyExistsException, PasswordWrongFormatException {
@@ -50,6 +52,7 @@ public class UserService implements UserServiceAPI{
         String hashedPassword = passwordHasher.hashPassword(password);
         return new User(username, hashedPassword);
     }
+
     private void validateStrings(String username, String password)
         throws UsernameWrongFormatException, PasswordWrongFormatException {
         if (username == null || !StringValidator.isValidUsername(username)) {

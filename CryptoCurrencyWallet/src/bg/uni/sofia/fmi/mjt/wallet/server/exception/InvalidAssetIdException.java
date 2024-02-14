@@ -1,6 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.exception;
 
-public class InvalidAssetIdException extends Exception{
+public class InvalidAssetIdException extends Exception {
     public InvalidAssetIdException(String message) {
         super(message);
     }

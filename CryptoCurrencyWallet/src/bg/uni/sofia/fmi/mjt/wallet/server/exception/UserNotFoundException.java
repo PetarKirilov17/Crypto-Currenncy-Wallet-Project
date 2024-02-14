@@ -1,6 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.exception;
 
-public class UserNotFoundException extends Exception{
+public class UserNotFoundException extends Exception {
     public UserNotFoundException(String message) {
         super(message);
     }

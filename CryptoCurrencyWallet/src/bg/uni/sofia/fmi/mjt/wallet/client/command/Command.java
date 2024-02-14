@@ -21,7 +21,7 @@ public class Command {
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append(commandLabel.userCommand);
-        for(var arg : getArguments()){
+        for (var arg : getArguments()) {
             res.append(" ").append(arg);
         }
         return res.toString();

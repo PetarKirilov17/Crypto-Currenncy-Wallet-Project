@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.UserServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.WalletServiceAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InsufficientBalanceException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidAssetIdException;

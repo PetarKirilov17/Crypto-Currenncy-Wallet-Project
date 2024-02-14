@@ -1,4 +1,4 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InsufficientBalanceException;

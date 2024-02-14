@@ -1,6 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.command;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoWalletAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InsufficientBalanceException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidAssetIdException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.LoginAuthenticationException;
@@ -10,6 +10,7 @@ import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserAlreadyExistsException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserNotFoundException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UsernameWrongFormatException;
 import bg.uni.sofia.fmi.mjt.wallet.server.logger.ErrorLogger;
+
 import java.nio.channels.SelectionKey;
 import java.util.Arrays;
 
@@ -39,8 +40,8 @@ public class CommandExecutor {
                 case WALLET_OVERALL_SUMMARY -> getWalletOverallSummary(key);
                 default -> new Response(false, UNKNOWN_COMMAND);
             };
-        }catch (Exception e){
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+        } catch (Exception e) {
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             return new Response(false, ERROR + e.getMessage());
         }
     }
@@ -51,15 +52,16 @@ public class CommandExecutor {
             String responseStr = "You successfully signed up!";
             return new Response(true, responseStr);
         } catch (UsernameWrongFormatException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "The username that you provided is in wrong format!";
             return new Response(false, responseStr);
         } catch (UserAlreadyExistsException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
-            String responseStr = "You cannot register with this username because there is an user with the same username!";
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
+            String responseStr =
+                "You cannot register with this username because there is an user with the same username!";
             return new Response(false, responseStr);
         } catch (PasswordWrongFormatException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "The password that you provided is in wrong format!";
             return new Response(false, responseStr);
         }
@@ -71,19 +73,19 @@ public class CommandExecutor {
             String responseStr = "You successfully logged in!";
             return new Response(true, responseStr);
         } catch (UserNotFoundException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "There is no user with this username!";
             return new Response(false, responseStr);
         } catch (UsernameWrongFormatException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "The username that you provided is in wrong format!";
             return new Response(false, responseStr);
         } catch (LoginAuthenticationException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "Your username or password is incorrect!";
             return new Response(false, responseStr);
         } catch (PasswordWrongFormatException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "The password that you provided is in wrong format!";
             return new Response(false, responseStr);
         }
@@ -95,7 +97,7 @@ public class CommandExecutor {
             String responseStr = "Successfully deposited " + String.format("%.4f", amount) + "$";
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         }
@@ -106,7 +108,7 @@ public class CommandExecutor {
             String responseStr = cryptoWallet.listOfferings(key, pageNumber);
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         }
@@ -115,18 +117,18 @@ public class CommandExecutor {
     private Response buyAsset(SelectionKey key, String assetId, double amount) {
         try {
             cryptoWallet.buyAsset(key, assetId, amount);
-            String responseStr = "You successfully bought " +  assetId +  " for " + String.format("%.4f", amount) + "$";
+            String responseStr = "You successfully bought " + assetId + " for " + String.format("%.4f", amount) + "$";
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         } catch (InsufficientBalanceException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You do not have enough money!";
             return new Response(false, responseStr);
         } catch (InvalidAssetIdException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "There is no asset with this id!";
             return new Response(false, responseStr);
         }
@@ -135,14 +137,15 @@ public class CommandExecutor {
     private Response sellAsset(SelectionKey key, String assetId) {
         try {
             double earnedMoney = cryptoWallet.sellAsset(key, assetId);
-            String responseStr = "You successfully sold your actives from " + assetId + " and earned " + String.format("%.4f", earnedMoney) + "$";
+            String responseStr = "You successfully sold your actives from " + assetId + " and earned " +
+                String.format("%.4f", earnedMoney) + "$";
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         } catch (InvalidAssetIdException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "There is no asset with this id!";
             return new Response(false, responseStr);
         }
@@ -153,7 +156,7 @@ public class CommandExecutor {
             String responseStr = cryptoWallet.getWalletSummary(key);
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         }
@@ -164,7 +167,7 @@ public class CommandExecutor {
             String responseStr = cryptoWallet.getWalletOverallSummary(key);
             return new Response(true, responseStr);
         } catch (UnauthorizedUserException e) {
-            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " +  Arrays.toString(e.getStackTrace()));
+            ErrorLogger.log("Message: " + e.getMessage() + " | Stack Trace: " + Arrays.toString(e.getStackTrace()));
             String responseStr = "You are not logged in! Please log in to your account!";
             return new Response(false, responseStr);
         }

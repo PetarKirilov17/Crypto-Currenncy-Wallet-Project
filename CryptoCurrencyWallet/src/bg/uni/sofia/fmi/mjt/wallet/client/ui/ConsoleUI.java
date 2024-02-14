@@ -2,7 +2,7 @@ package bg.uni.sofia.fmi.mjt.wallet.client.ui;
 
 import java.util.Scanner;
 
-public class ConsoleUI implements UI{
+public class ConsoleUI implements UI {
     @Override
     public String read() {
         Scanner scanner = new Scanner(System.in);

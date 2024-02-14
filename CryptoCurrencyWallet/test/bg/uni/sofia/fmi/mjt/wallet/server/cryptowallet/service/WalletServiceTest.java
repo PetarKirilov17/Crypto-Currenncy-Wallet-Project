@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdater;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoAssetUpdater;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.Database;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.Purchase;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;

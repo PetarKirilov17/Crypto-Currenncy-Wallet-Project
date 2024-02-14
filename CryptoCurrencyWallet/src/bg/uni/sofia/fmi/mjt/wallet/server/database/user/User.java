@@ -47,48 +47,48 @@ public class User implements Serializable {
         this.balance -= amount;
     }
 
-    public void addPurchase(Purchase purchase){
+    public void addPurchase(Purchase purchase) {
         purchases.add(purchase);
     }
 
-    public void removePurchase(String assetId){
-        for (var it : purchases){
-            if(it.assetId().equals(assetId)){
+    public void removePurchase(String assetId) {
+        for (var it : purchases) {
+            if (it.assetId().equals(assetId)) {
                 purchases.remove(it);
                 break;
             }
         }
     }
 
-    public boolean containsAsset(String assetId){
-        for (var it : purchases){
-            if(it.assetId().equals(assetId)){
+    public boolean containsAsset(String assetId) {
+        for (var it : purchases) {
+            if (it.assetId().equals(assetId)) {
                 return true;
             }
         }
         return false;
     }
 
-    public double getAmountOfAsset(String assetId){
-        for(var it : purchases){
-            if(it.assetId().equals(assetId)){
+    public double getAmountOfAsset(String assetId) {
+        for (var it : purchases) {
+            if (it.assetId().equals(assetId)) {
                 return it.amount();
             }
         }
         return 0.0;
     }
 
-    public double getAvgPrice(String assetId){
-        for(var it : purchases){
-            if(it.assetId().equals(assetId)){
+    public double getAvgPrice(String assetId) {
+        for (var it : purchases) {
+            if (it.assetId().equals(assetId)) {
                 return it.avgPrice();
             }
         }
         return 0.0;
     }
 
-    public Set<Purchase> getPurchases(){
-        if(purchases == null){
+    public Set<Purchase> getPurchases() {
+        if (purchases == null) {
             return new HashSet<>();
         }
         return Collections.unmodifiableSet(purchases);

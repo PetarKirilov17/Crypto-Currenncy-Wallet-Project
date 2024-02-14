@@ -20,7 +20,7 @@ public class CryptoWalletClient {
 
     private SocketChannel socketChannel;
 
-    public CryptoWalletClient(){
+    public CryptoWalletClient() {
         gson = new Gson();
         buffer = ByteBuffer.allocate(BUFFER_SIZE);
     }
@@ -34,7 +34,7 @@ public class CryptoWalletClient {
         }
     }
 
-    public void stop(){
+    public void stop() {
         try {
             socketChannel.close();
         } catch (IOException e) {

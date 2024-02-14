@@ -10,7 +10,7 @@ public class CommandCreator {
     private static final String INPUT_SEPARATOR = " ";
     private UI ui;
 
-    public CommandCreator(UI ui){
+    public CommandCreator(UI ui) {
         this.ui = ui;
     }
 

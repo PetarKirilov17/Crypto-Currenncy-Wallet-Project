@@ -1,4 +1,4 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.database.Database;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.password.PasswordHasherAPI;
@@ -8,7 +8,6 @@ import bg.uni.sofia.fmi.mjt.wallet.server.exception.PasswordWrongFormatException
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserAlreadyExistsException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserNotFoundException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UsernameWrongFormatException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

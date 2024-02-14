@@ -19,6 +19,7 @@ public class FileDatabase implements Database {
 
     private final Path usersPath;
     private Map<String, User> users;
+
     public FileDatabase(Path usersPath) {
         this.usersPath = usersPath;
         users = loadUsersFromFile();
@@ -47,7 +48,7 @@ public class FileDatabase implements Database {
     }
 
     @Override
-    public Map<String,User> getUsers(){
+    public Map<String, User> getUsers() {
         return Collections.unmodifiableMap(this.users);
     }
 

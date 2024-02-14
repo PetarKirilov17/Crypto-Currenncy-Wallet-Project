@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.UserServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.WalletServiceAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InsufficientBalanceException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidAssetIdException;
@@ -11,11 +11,14 @@ import bg.uni.sofia.fmi.mjt.wallet.server.exception.UnauthorizedUserException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserAlreadyExistsException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UserNotFoundException;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.UsernameWrongFormatException;
+
 import java.nio.channels.SelectionKey;
+
 public class CryptoWalletController implements CryptoWalletAPI {
 
     private final UserServiceAPI userService;
     private final WalletServiceAPI walletService;
+
     public CryptoWalletController(UserServiceAPI userService, WalletServiceAPI walletService) {
         this.userService = userService;
         this.walletService = walletService;
@@ -58,7 +61,8 @@ public class CryptoWalletController implements CryptoWalletAPI {
     }
 
     @Override
-    public double sellAsset(SelectionKey key, String assetId) throws UnauthorizedUserException, InvalidAssetIdException {
+    public double sellAsset(SelectionKey key, String assetId)
+        throws UnauthorizedUserException, InvalidAssetIdException {
         checkAuthorization(key);
         User currentUser = (User) key.attachment();
         return walletService.sellAsset(currentUser, assetId);
@@ -75,7 +79,7 @@ public class CryptoWalletController implements CryptoWalletAPI {
     public String getWalletOverallSummary(SelectionKey key) throws UnauthorizedUserException {
         checkAuthorization(key);
         User currentUser = (User) key.attachment();
-       return walletService.getWalletOverallSummary(currentUser);
+        return walletService.getWalletOverallSummary(currentUser);
     }
 
     private void checkAuthorization(SelectionKey key) throws UnauthorizedUserException {

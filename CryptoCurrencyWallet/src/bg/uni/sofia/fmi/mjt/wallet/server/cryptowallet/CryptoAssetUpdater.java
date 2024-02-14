@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.CryptoConsumerAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.CryptoConsumerAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
 
 import java.io.BufferedWriter;
@@ -18,28 +18,27 @@ import java.util.List;
 import java.util.Map;
 
 public class CryptoAssetUpdater {
+    private static final int UPDATE_INTERVAL_IN_MINS = 30;
     private static final String RES_DIRECTORY = "res";
     private static final String ASSET_IDS_FILE_PATH = "assetIds.txt";
     private Path assetIdsPath = Path.of(RES_DIRECTORY, ASSET_IDS_FILE_PATH).toAbsolutePath();
-    private final static int UPDATE_INTERVAL_IN_MINS = 30;
     private CryptoConsumerAPI cryptoConsumer;
-
     private int intervalInMins;
 
-    public CryptoAssetUpdater(CryptoConsumerAPI cryptoConsumer){
+    public CryptoAssetUpdater(CryptoConsumerAPI cryptoConsumer) {
         this.cryptoConsumer = cryptoConsumer;
         this.intervalInMins = UPDATE_INTERVAL_IN_MINS;
     }
 
-    public Map<String, CryptoAsset> updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap){
-        if(assetMap.isEmpty()){
+    public Map<String, CryptoAsset> updateAllAssetsIfNeeded(Map<String, CryptoAsset> assetMap) {
+        if (assetMap.isEmpty()) {
             List<CryptoAsset> assetList = null;
             try {
                 assetList = this.cryptoConsumer.getAllAssets();
             } catch (InvalidCredentialsForAPIException e) {
                 throw new RuntimeException(e.getMessage(), e.getCause());
             }
-            for (var a : assetList){
+            for (var a : assetList) {
                 assetMap.put(a.assetId(), a);
             }
             writeCryptoAssetsIdsToFile(assetList.stream().map(CryptoAsset::assetId).toList());
@@ -49,24 +48,28 @@ public class CryptoAssetUpdater {
         var earliest = Collections.min(assetList, Comparator.comparing(CryptoAsset::lastUpdated));
         var currTime = LocalDateTime.now();
         Duration duration = Duration.between(earliest.lastUpdated(), currTime);
-        if(duration.toMinutes() > this.intervalInMins){
-            try {
-                assetList = cryptoConsumer.getAllAssets();
-            } catch (InvalidCredentialsForAPIException e) {
-                throw new RuntimeException(e.getMessage(), e.getCause());
-            }
-            assetMap.clear();
-            for (var a : assetList){
-                assetMap.put(a.assetId(), a);
-            }
+        if (duration.toMinutes() > this.intervalInMins) {
+            update(assetList, assetMap);
         }
         return assetMap;
     }
 
-    public Map<String, CryptoAsset> updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId){
+    private void update(List<CryptoAsset> assetList, Map<String, CryptoAsset> assetMap) {
+        try {
+            assetList = cryptoConsumer.getAllAssets();
+        } catch (InvalidCredentialsForAPIException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+        assetMap.clear();
+        for (var a : assetList) {
+            assetMap.put(a.assetId(), a);
+        }
+    }
+
+    public Map<String, CryptoAsset> updateAssetIfNeeded(Map<String, CryptoAsset> assetMap, String assetId) {
         var asset = assetMap.get(assetId);
-        Duration duration = Duration.between(asset.lastUpdated(),LocalDateTime.now());
-        if(duration.toMinutes() > this.intervalInMins){
+        Duration duration = Duration.between(asset.lastUpdated(), LocalDateTime.now());
+        if (duration.toMinutes() > this.intervalInMins) {
             try {
                 asset = cryptoConsumer.getAssetById(asset.assetId());
             } catch (InvalidCredentialsForAPIException e) {
@@ -77,15 +80,15 @@ public class CryptoAssetUpdater {
         return assetMap;
     }
 
-    public void setInterval(int intervalInMins){
-        if(intervalInMins < 0){
+    public void setInterval(int intervalInMins) {
+        if (intervalInMins < 0) {
             throw new RuntimeException("Interval cannot be a negative number!");
         }
         this.intervalInMins = intervalInMins;
     }
 
-    private void writeCryptoAssetsIdsToFile(List<String> assetIds){
-        if(Files.exists(assetIdsPath)){
+    private void writeCryptoAssetsIdsToFile(List<String> assetIds) {
+        if (Files.exists(assetIdsPath)) {
             return;
         }
         try {

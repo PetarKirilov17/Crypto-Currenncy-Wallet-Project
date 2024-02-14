@@ -1,6 +1,6 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
 
 import java.util.List;

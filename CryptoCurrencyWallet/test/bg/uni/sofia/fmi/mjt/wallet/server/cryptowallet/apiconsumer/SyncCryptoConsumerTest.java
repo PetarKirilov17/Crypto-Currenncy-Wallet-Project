@@ -1,7 +1,8 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,10 +31,13 @@ public class SyncCryptoConsumerTest {
     @InjectMocks
     private SyncCryptoConsumer consumer;
 
+    @BeforeEach
+    void setConsumer(){
+        consumer = new SyncCryptoConsumer(client, "testAPIKEY");
+    }
+
     @Test
     void testGetAllAssetsInvalidCredentials() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         HttpResponse<String> mockResponse = mock(HttpResponse.class);
         when(mockResponse.statusCode()).thenReturn(401);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(mockResponse);
@@ -44,8 +48,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAllAssetsSuccessfully() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         HttpResponse<String> mockResponse = mock(HttpResponse.class);
         when(mockResponse.statusCode()).thenReturn(200);
         when(mockResponse.body()).thenReturn("" +
@@ -74,8 +76,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAllAssetsThrowsRuntimeExceptionWhenClientThrowsIOException() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenThrow(
             new IOException("IO Exception"));
         assertThrows(RuntimeException.class, () -> consumer.getAllAssets(),
@@ -85,8 +85,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAllAssetsThrowsRuntimeExceptionWhenClientThrowsInterruptedException() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenThrow(
             new InterruptedException("Interrupted Exception"));
         assertThrows(RuntimeException.class, () -> consumer.getAllAssets(),
@@ -96,8 +94,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAssetByAssetIdInvalidCredentials() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         HttpResponse<String> mockResponse = mock(HttpResponse.class);
         when(mockResponse.statusCode()).thenReturn(401);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(mockResponse);
@@ -108,8 +104,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAssetByIdSuccessfully() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         HttpResponse<String> mockResponse = mock(HttpResponse.class);
         when(mockResponse.statusCode()).thenReturn(200);
         when(mockResponse.body()).thenReturn("[{\"asset_id\":\"BTC\",\"name\":\"Bitcoin\",\"price_usd\":50000, \"type_is_crypto\":1}]");
@@ -123,8 +117,6 @@ public class SyncCryptoConsumerTest {
     }
     @Test
     void testGetAssetByIdThrowsRuntimeExceptionWhenAssetIdIsNotValid() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         HttpResponse<String> mockResponse = mock(HttpResponse.class);
         when(mockResponse.statusCode()).thenReturn(200);
         when(mockResponse.body()).thenReturn("[]");
@@ -135,8 +127,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAssetByAssetIdThrowsRuntimeExceptionWhenClientThrowsIOException() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenThrow(
             new IOException("IO Exception"));
         assertThrows(RuntimeException.class, () -> consumer.getAssetById("BTC"),
@@ -146,8 +136,6 @@ public class SyncCryptoConsumerTest {
 
     @Test
     void testGetAssetByAssetIDThrowsRuntimeExceptionWhenClientThrowsInterruptedException() throws Exception {
-        String apiKey = "testApiKey";
-        System.setProperty("CryptoAPI_KEY", apiKey);
         when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenThrow(
             new InterruptedException("Interrupted Exception"));
         assertThrows(RuntimeException.class, () -> consumer.getAssetById("BTC"),

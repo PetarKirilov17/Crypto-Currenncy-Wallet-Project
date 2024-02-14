@@ -1,6 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.client.exception;
 
-public class InvalidUserCommandException extends Exception{
+public class InvalidUserCommandException extends Exception {
 
     public InvalidUserCommandException(String message) {
         super(message);

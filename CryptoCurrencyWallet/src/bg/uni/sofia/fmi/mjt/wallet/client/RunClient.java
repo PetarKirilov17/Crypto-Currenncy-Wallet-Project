@@ -11,10 +11,9 @@ import bg.uni.sofia.fmi.mjt.wallet.client.ui.ConsoleUI;
 import bg.uni.sofia.fmi.mjt.wallet.client.ui.UI;
 
 public class RunClient {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         UI ui = new ConsoleUI();
         CryptoWalletClient cryptoWalletClient = new CryptoWalletClient();
-
         try {
             cryptoWalletClient.run();
         } catch (ServerNotFoundException e) {
@@ -26,7 +25,6 @@ public class RunClient {
         CommandValidator validator = new CommandValidator(ui);
         CommandExecutor commandExecutor = new CommandExecutor(ui, cryptoWalletClient, validator, sessionInfo);
         CommandCreator commandCreator = new CommandCreator(ui);
-
         ui.write("Welcome to Crypto Wallet! Type help to see the available commands: ");
         while (true) {
             Command command;
@@ -36,7 +34,6 @@ public class RunClient {
                 ui.writeError(e.getMessage());
                 continue;
             }
-
             if (command.getCommandLabel().equals(CommandLabel.QUIT)) {
                 cryptoWalletClient.stop();
                 return;

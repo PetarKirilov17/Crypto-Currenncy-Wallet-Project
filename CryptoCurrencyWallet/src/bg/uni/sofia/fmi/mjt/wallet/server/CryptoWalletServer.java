@@ -14,7 +14,6 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
-import java.util.Set;
 
 public class CryptoWalletServer {
     public static final int SERVER_PORT = 7777;
@@ -25,27 +24,23 @@ public class CryptoWalletServer {
     private ByteBuffer buffer;
     private final CommandExecutor commandExecutor;
 
+    private final Gson gson;
+
     public CryptoWalletServer(CommandExecutor executor) {
         this.commandExecutor = executor;
+        gson = new Gson();
     }
 
     public void start() {
-        Gson gson = new Gson();
         try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
             selector = Selector.open();
             configServerSocketChannel(serverSocketChannel, selector);
-
-            this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
-            isServerOn = true;
-            System.out.println("Server started!");
             while (isServerOn) {
                 int readyChannels = selector.select();
                 if (readyChannels == 0) {
                     continue;
                 }
-                Set<SelectionKey> selectionKeySet = selector.selectedKeys();
-                Iterator<SelectionKey> keyIterator = selectionKeySet.iterator();
-
+                Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
                 while (keyIterator.hasNext()) {
                     SelectionKey key = keyIterator.next();
                     if (key.isReadable()) {
@@ -55,14 +50,7 @@ public class CryptoWalletServer {
                         if (clientInput == null) {
                             continue;
                         }
-                        Response response = commandExecutor.execute(key, gson.fromJson(clientInput, Command.class));
-                        if(response.isOk()) {
-                            System.out.println("Response: " + response.getResponse());
-                        }else{
-                            System.err.println("Response Error: " + response.getResponse());
-                        }
-                        sendResponse(sc, gson.toJson(response));
-                        //TODO: add functionality for disconnecting
+                        processResponse(sc, key, clientInput);
                     } else if (key.isAcceptable()) {
                         accept(key);
                     }
@@ -86,6 +74,15 @@ public class CryptoWalletServer {
         channel.bind(new InetSocketAddress(SERVER_HOST, SERVER_PORT));
         channel.configureBlocking(false);
         channel.register(selector, SelectionKey.OP_ACCEPT);
+        this.buffer = ByteBuffer.allocate(BUFFER_SIZE);
+        this.isServerOn = true;
+        System.out.println("Server started!");
+    }
+
+    private void processResponse(SocketChannel sc, SelectionKey key, String clientInput) throws IOException {
+        Response response = commandExecutor.execute(key, this.gson.fromJson(clientInput, Command.class));
+        printResponse(response);
+        sendResponse(sc, this.gson.toJson(response));
     }
 
     private void accept(SelectionKey key) throws IOException {
@@ -115,5 +112,13 @@ public class CryptoWalletServer {
         buffer.put(response.getBytes());
         buffer.flip();
         sc.write(buffer);
+    }
+
+    private void printResponse(Response response) {
+        if (response.isOk()) {
+            System.out.println("Response: " + response.getResponse());
+        } else {
+            System.err.println("Response Error: " + response.getResponse());
+        }
     }
 }

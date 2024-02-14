@@ -22,8 +22,8 @@ public class CommandExecutor {
         gson = new Gson();
     }
 
-    public void execute(Command command){
-        if(command.getCommandLabel().equals(CommandLabel.HELP)){
+    public void execute(Command command) {
+        if (command.getCommandLabel().equals(CommandLabel.HELP)) {
             printHelpMenu();
             return;
         }
@@ -50,8 +50,8 @@ public class CommandExecutor {
         }
     }
 
-    private void printHelpMenu(){
-        if(!sessionInfo.isLoggedIn()){
+    private void printHelpMenu() {
+        if (!sessionInfo.isLoggedIn()) {
             ui.write(CommandLabel.REGISTER.userCommand + " <username> <password>");
             ui.write(CommandLabel.LOGIN.userCommand + " <username> <password>");
             ui.write(CommandLabel.QUIT.userCommand);
@@ -67,18 +67,18 @@ public class CommandExecutor {
         ui.write(CommandLabel.HELP.userCommand);
     }
 
-    private void printResponse(Command command){
+    private void printResponse(Command command) {
         var responseStr = httpClient.sendRequest(command);
         Response response = gson.fromJson(responseStr, Response.class);
-        if(response.isOk()){
+        if (response.isOk()) {
             ui.write(response.getResponse());
-        }else{
+        } else {
             ui.writeError(response.getResponse());
         }
     }
 
-    private void register(Command command){
-        if(!validator.validateRegisterAndSignUp(command)){
+    private void register(Command command) {
+        if (!validator.validateRegisterAndSignUp(command)) {
             return;
         }
         Response response = gson.fromJson(httpClient.sendRequest(command), Response.class);
@@ -91,8 +91,8 @@ public class CommandExecutor {
         }
     }
 
-    private void login(Command command){
-        if(!validator.validateRegisterAndSignUp(command)){
+    private void login(Command command) {
+        if (!validator.validateRegisterAndSignUp(command)) {
             return;
         }
         Response response = gson.fromJson(httpClient.sendRequest(command), Response.class);
@@ -105,36 +105,36 @@ public class CommandExecutor {
         }
     }
 
-    private void depositMoney(Command command){
-        if(!validator.validateDepositMoney(command)){
+    private void depositMoney(Command command) {
+        if (!validator.validateDepositMoney(command)) {
             return;
         }
         printResponse(command);
     }
 
-    private void buyAsset(Command command){
-        if(!validator.validateBuyAsset(command)){
+    private void buyAsset(Command command) {
+        if (!validator.validateBuyAsset(command)) {
             return;
         }
         printResponse(command);
     }
 
-    private void sellAsset(Command command){
-        if(!validator.validateSellAsset(command)){
+    private void sellAsset(Command command) {
+        if (!validator.validateSellAsset(command)) {
             return;
         }
         printResponse(command);
     }
 
-    private void listOfferings(Command command){
-        if(!validator.validateListOfferings(command)){
+    private void listOfferings(Command command) {
+        if (!validator.validateListOfferings(command)) {
             return;
         }
         printResponse(command);
     }
 
-    private void noArgsCommand(Command command){
-        if(!validator.validateCommandsWithNoArguments(command)){
+    private void noArgsCommand(Command command) {
+        if (!validator.validateCommandsWithNoArguments(command)) {
             return;
         }
         printResponse(command);

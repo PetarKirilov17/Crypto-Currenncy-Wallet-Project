@@ -1,7 +1,7 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer;
 
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.Asset;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets.CryptoAsset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.Asset;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets.CryptoAsset;
 import bg.uni.sofia.fmi.mjt.wallet.server.exception.InvalidCredentialsForAPIException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,15 +16,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyncCryptoConsumer implements CryptoConsumerAPI{
+public class SyncCryptoConsumer implements CryptoConsumerAPI {
     private HttpClient client;
+    private String apiKey;
     private static final String COIN_API_URL = "https://rest.coinapi.io/v1/assets";
 
     private static final int CREDENTIALS_BAD_REQUEST_STATUS_CODE = 401;
 
-    public SyncCryptoConsumer(HttpClient client){
+    public SyncCryptoConsumer(HttpClient client, String apiKey) {
         this.client = client;
+        this.apiKey = apiKey;
     }
+
     @Override
     public List<CryptoAsset> getAllAssets() throws InvalidCredentialsForAPIException {
         HttpResponse<String> responseStr;
@@ -34,9 +37,8 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
         } catch (URISyntaxException e) {
             throw new RuntimeException(e.getMessage(), e.getCause());
         }
-        HttpRequest request = HttpRequest.newBuilder().uri(uri)
-            .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
-            .build();
+        HttpRequest request =
+            HttpRequest.newBuilder().uri(uri).header("X-CoinAPI-Key", apiKey).build();
         try {
             responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
@@ -46,8 +48,8 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Asset[] response = gson.fromJson(responseStr.body(), Asset[].class);
         List<CryptoAsset> result = new ArrayList<>();
-        for(var it : response){
-            if(it.typeIsCrypto() == 0){
+        for (var it : response) {
+            if (it.typeIsCrypto() == 0) {
                 continue;
             }
             result.add(new CryptoAsset(it.assetId(), it.name(), it.priceUSD(), LocalDateTime.now()));
@@ -60,15 +62,14 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
         HttpResponse<String> responseStr;
         URI uri;
         try {
-            uri = new URI(COIN_API_URL+"/"+id);
+            uri = new URI(COIN_API_URL + "/" + id);
 
         } catch (URISyntaxException e) {
             throw new RuntimeException(e.getMessage(), e.getCause());
         }
-        HttpRequest request = HttpRequest.newBuilder().uri(uri)
-            .header("X-CoinAPI-Key", System.getenv("CryptoAPI_KEY"))
-            .build();
-        try{
+        HttpRequest request =
+            HttpRequest.newBuilder().uri(uri).header("X-CoinAPI-Key", apiKey).build();
+        try {
             responseStr = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e.getMessage(), e.getCause());
@@ -76,14 +77,14 @@ public class SyncCryptoConsumer implements CryptoConsumerAPI{
         validateResponse(responseStr.statusCode());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Asset[] response = gson.fromJson(responseStr.body(), Asset[].class);
-        if(response.length == 0){
+        if (response.length == 0) {
             throw new RuntimeException("No valid response!");
         }
         return new CryptoAsset(response[0].assetId(), response[0].name(), response[0].priceUSD(), LocalDateTime.now());
     }
 
     private void validateResponse(int responseStatusCode) throws InvalidCredentialsForAPIException {
-        if(responseStatusCode == CREDENTIALS_BAD_REQUEST_STATUS_CODE){
+        if (responseStatusCode == CREDENTIALS_BAD_REQUEST_STATUS_CODE) {
             throw new InvalidCredentialsForAPIException("API Key is not specified or it is not correctly formatted!");
         }
     }

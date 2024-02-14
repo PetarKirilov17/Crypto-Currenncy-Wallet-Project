@@ -1,15 +1,15 @@
 package bg.uni.sofia.fmi.mjt.wallet.server;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.command.CommandExecutor;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoAssetUpdater;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.CryptoWalletController;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.CryptoConsumerAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.SyncCryptoConsumer;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserService;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.UserServiceAPI;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletService;
-import bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.service.WalletServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoAssetUpdater;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoWalletAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.CryptoWalletController;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.CryptoConsumerAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.SyncCryptoConsumer;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.UserService;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.UserServiceAPI;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.WalletService;
+import bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.service.WalletServiceAPI;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.Database;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.FileDatabase;
 import bg.uni.sofia.fmi.mjt.wallet.server.database.password.MDPasswordHasher;
@@ -30,7 +30,7 @@ public class RunServer {
         Database database = new FileDatabase(usersPath);
 
         HttpClient httpClient = HttpClient.newBuilder().build();
-        CryptoConsumerAPI consumerAPI = new SyncCryptoConsumer(httpClient);
+        CryptoConsumerAPI consumerAPI = new SyncCryptoConsumer(httpClient, System.getenv("CryptoAPI_KEY"));
         CryptoAssetUpdater updater = new CryptoAssetUpdater(consumerAPI);
         WalletServiceAPI walletServiceAPI = new WalletService(database, updater);
         PasswordHasherAPI passwordHasherAPI = new MDPasswordHasher();

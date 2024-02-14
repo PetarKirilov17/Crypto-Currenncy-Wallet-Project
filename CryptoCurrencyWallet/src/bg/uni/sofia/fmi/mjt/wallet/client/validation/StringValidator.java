@@ -12,7 +12,6 @@ public class StringValidator {
     private static final String REGEX_USERNAME = "^[A-Za-z][A-Za-z0-9_]{" + (MIN_USERNAME_LENGTH - 1) + "," + (
         MAX_USERNAME_LENGTH - 1) + "}$";
 
-
     public static boolean isValidUsername(String username) {
         return Pattern.matches(REGEX_USERNAME, username);
     }

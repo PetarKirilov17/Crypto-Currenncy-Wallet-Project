@@ -1,4 +1,4 @@
-package bg.uni.sofia.fmi.mjt.wallet.server.cryptoWallet.apiconsumer.assets;
+package bg.uni.sofia.fmi.mjt.wallet.server.cryptowallet.apiconsumer.assets;
 
 import com.google.gson.annotations.SerializedName;
 

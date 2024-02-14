@@ -1,7 +1,6 @@
 package bg.uni.sofia.fmi.mjt.wallet.server.database;
 
 import bg.uni.sofia.fmi.mjt.wallet.server.database.user.User;
-import bg.uni.sofia.fmi.mjt.wallet.server.database.user.Purchase;
 
 import java.util.Map;
 
